@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript" src="../dist/index.js"></script>
+  <script type="text/javascript">
+
+    class MonHeader extends thorium.component{
+      constructor(){
+        super({
+          type:'MonHeader',
+          prop : {
+            styleSheet : Style.CssSheet({
+              "monheader" : Style.Css({
+                height : "100%",
+                width : "100%",
+                background : "red",
+              }),
+              "monheader:hover" : Style.Css({
+                background : "yellow",
+              })
+            })
+          },
+          childrens : [
+            new thorium.Components.Div({
+              childrens : [
+                new thorium.Components.Text("LOL")
+              ]
+            })
+          ]
+        })
+      }
+    }
+
+    class View1 extends View{
+      constructor(){
+        super(new thorium.Components.App({
+          prop : {
+            style : Style.Css({
+              height : "100%",
+              width : '100%',
+              position : "absolute",
+              top : 0,
+              left: 0
+            })
+          },
+          childrens : [
+            new MonHeader()
+          ],
+          proto : {
+            onInitialise : function(){
+              console.log("init")
+            },
+            onFrameUpdate : function(cpuStats){
+              // console.log(cpuStats);
+            },
+            onMouseDown : function(){
+              new thorium.UI.NodeUI([
+                new thorium.Components.Dialog({
+                  childrens : [
+                    new thorium.Components.Textarea({
+
+                    })
+                  ]
+                })
+              ])
+              .BuildIn(document.body)
+            }
+          }
+        }))
+      }
+    }
+
+    thorium.Vue(View1).Show();
+
+  </script>
+</html>
