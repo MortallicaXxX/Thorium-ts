@@ -16,7 +16,7 @@ export namespace Mobile{
         type : "app",
         prop : {
           style : (new Style).Css({
-            position : "absolute",
+            position : "fixed",
             height : "var(--thorium-default-height)",
             width : "var(--thorium-default-width)",
             left : 0,
@@ -55,6 +55,7 @@ export namespace Mobile{
               "grid-row": 1,
               transition: "1s",
               display : "grid",
+              "padding-top" : "7vw"
             }),
             "widget.leftwidget.active" : (new Style).Css({
               transform: "translateX(100%)",
@@ -126,7 +127,7 @@ export namespace Mobile{
             let header:any = arg.header;
             template.push(new header());
           }
-
+          console.log(template,arg);
           return template;
         })(),
         proto : Object.assign({
@@ -160,25 +161,33 @@ export namespace Mobile{
           id : "appBody",
           style : (new Style).Css({
             "grid-column" : 1,
-            "grid-row" : 2,
+            "grid-row" : "1/3",
+            "padding-top": "7vw",
           })
         },
         childrens : ("childrens" in arg ? arg.childrens : []),
         proto : {
           buttons : ("buttons" in arg ? new Prototype.Variable(arg.buttons,{writable:true}) : new Prototype.Variable([],{writable:true})),
+          header : ("header" in arg ? new Prototype.Variable(arg.header,{writable:true}) : new Prototype.Variable([],{writable:true})),
           mobileMenu : new Prototype.Variable(null,{writable:true}),
+          mobileHeader : new Prototype.Variable(null,{writable:true}),
           onInitialise : async function(){
             this.mobileMenu.Value = document.querySelectorAll("mobilemenu#mobilemenu")[0];
+            this.mobileHeader.Value = document.querySelectorAll("mobileheader#mobileheader")[0];
             this.turnActive();
           },
           onActive : function(){
             this.__add_btn();
+            this.__add_header();
           },
           __add_btn : function(){
             const _this = this;
-            this.mobileMenu.Value.th.animateDump(this.buttons.Value);
+            _this.mobileMenu.Value.th.animateDump(this.buttons.Value);
           },
-
+          __add_header : function(){
+            const _this = this;
+            _this.mobileHeader.Value.th.addHeader(this.header.Value);
+          },
         }
       }))
     }
@@ -197,19 +206,20 @@ export namespace Mobile{
         childrens : ('childrens' in arg ? arg.childrens : []),
         proto : {
           buttons : ("buttons" in arg ? new Prototype.Variable(arg.buttons,{writable:true}) : new Prototype.Variable([],{writable:true})),
+          header : ("header" in arg ? new Prototype.Variable(arg.header,{writable:true}) : new Prototype.Variable([],{writable:true})),
           mobileMenu : new Prototype.Variable(null,{writable:true}),
+          mobileHeader : new Prototype.Variable(null,{writable:true}),
           onInitialise : async function(){
             this.mobileMenu.Value = document.querySelectorAll("mobilemenu#mobilemenu")[0];
+            this.mobileHeader.Value = document.querySelectorAll("mobileheader#mobileheader")[0];
           },
           action : function(){
             this.turnActive();
           },
           onActive : function(){
             this.__add_btn();
+            this.__add_header();
             this.e.Value.parentNode.th.radioLike();
-            // setTimeout(function(_this){
-            //   _this.e.Value.parentNode.th.radioLike();
-            // },1000,this);
           },
           onUnActive : function(){
             let main:any = document.querySelectorAll("main#appBody")[0];
@@ -218,6 +228,10 @@ export namespace Mobile{
           __add_btn : function(){
             const _this = this;
             _this.mobileMenu.Value.th.animateDump(this.buttons.Value);
+          },
+          __add_header : function(){
+            const _this = this;
+            _this.mobileHeader.Value.th.addHeader(this.header.Value);
           },
         }
       }));
@@ -445,19 +459,71 @@ export namespace Mobile{
       super(new Models.Template({
         type : "mobileheader",
         prop : {
-          style : (new Style).Css({
-            "grid-column" : 1,
-            "grid-row" : 1,
-            height : "7vw",
-            display : "grid",
-            "grid-template-rows" : "minmax(0,1fr)",
-            "z-index" : 30,
+          id : "mobileheader",
+          // style : (new Style).Css({})
+          selfStyleSheet : (new Style).CssSheet({
+            "mobileheader#mobileheader" : (new Style).Css({
+              transition: "1s",
+              "border-bottom": "1px solid black",
+              "grid-column": 1,
+              "grid-row": 1,
+              height: 0,
+              display: "inline-flex",
+              "grid-template-rows": "minmax(0,1fr)",
+              "z-index": 30,
+              background: "whitesmoke",
+              opacity: 0,
+            }),
+            "mobileheader#mobileheader.active" : (new Style).Css({
+              opacity: 1,
+              height : "7vw"
+            })
           })
         },
         childrens : ("childrens" in arg ? arg.childrens : []),
-        proto : ("proto" in arg ? arg.proto : {})
+        proto : {
+          clear : function(){
+            const length = this.e.Value.children.length - 1;
+            for(const i of Array.from({length : length},(x:null,i:number)=>i)){
+              if(this.e.Value.children[length - i].tagName != "STYLE")this.e.Value.children[length - i].remove();
+            }
+          },
+          addHeader : function(elements:any){
+            const _this:any = this;
+            this.clear();
+            for(const i of Array.from(elements,(x,i)=>i)){
+              new UI.NodeUI(new elements[i]())
+              .BuildIn(this.e.Value)
+              .then(function(result:any){
+                result.th.Initialise();
+                if(i == elements.length - 1)_this.hide();
+              })
+            }
+          },
+          hide : function(){
+            if(this.isEmpty())this.turnActive();
+            else this.turnActive();
+          },
+          isEmpty : function(){
+            return (this.e.Value.children.length == 0 ? true : false);
+          }
+        }
       }));
     }
+  }
+
+  export class HeaderElement extends UI.ElementUI{
+
+    constructor(arg:Models.Template){
+      super(new Models.Template({
+        type : "headerelement",
+        prop : ("prop" in arg ? arg.prop : {}),
+        childrens : ("childrens" in arg ? arg.childrens : []),
+        proto : ("proto" in arg ? arg.proto : {})
+      }));
+
+    }
+
   }
 
 }

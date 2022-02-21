@@ -47,6 +47,7 @@ export namespace Models{
     export interface Body{
       childrens:object[];
       buttons:ClassDecorator[];
+      header:ClassDecorator[];
     }
     export interface Widget extends Body{
       position?:string;

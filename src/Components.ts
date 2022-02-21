@@ -1,5 +1,6 @@
 import { UI } from "./UI";
 import { Models } from "./Models";
+import { Style } from "./Style";
 
 export namespace Components{
 
@@ -260,6 +261,39 @@ export namespace Components{
     }
   }
 
+  export class Select extends UI.ElementUI{
+    constructor(arg:Models.Template){
+      super(new Models.Template({
+        type : 'select',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : {})
+      }));
+    }
+  }
+
+  export class Option extends UI.ElementUI{
+    constructor(arg:Models.Template){
+      super(new Models.Template({
+        type : 'option',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : {})
+      }));
+    }
+  }
+
+  export class OptionGroup extends UI.ElementUI{
+    constructor(arg:Models.Template){
+      super(new Models.Template({
+        type : 'optgroup',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : {})
+      }));
+    }
+  }
+
   /*
   Manque :
     - H1
@@ -274,6 +308,356 @@ export namespace Components{
 
   // MOBILES
 
+  export namespace Themes{
 
+    export namespace Default{
+
+      export namespace Button{
+
+        export namespace Models{
+
+          export interface Base{
+            size?:string,
+            background?:string,
+            color?:string,
+            text:string,
+            prop?:object,
+            proto?:any,
+          }
+
+          export interface Icon extends Base{
+            iconURL?:string;
+            iconSVG?:string;
+            iconSide?:string;
+          }
+
+        }
+        //
+        // export interface Template{
+        //   size?:string,
+        //   background?:string,
+        //   color?:string,
+        //   text:string,
+        //   prop?:object,
+        //   proto?:any,
+        // }
+
+        export class Default extends Components.Button{
+          constructor(arg:Button.Models.Base){
+
+            if("prop" in arg == false)arg.prop = {};
+
+            super(new Models.Template({
+              type: "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : arg.text,
+                  style : (new Style).Css({
+                    color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                    "background-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`)
+                  })
+                }
+              },
+              proto : ("proto" in arg ? arg.proto : {}),
+            }));
+          }
+        }
+
+        export class DefaultOutline extends Components.Button{
+          constructor(arg:Button.Models.Base){
+
+            if("prop" in arg == false)arg.prop = {};
+
+            super(new Models.Template({
+              type: "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn outline ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : arg.text,
+                  style : (new Style).Css({
+                    color : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : {
+                ...arg.proto,
+                ...{
+                  arg : arg,
+                  background : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                  onFocus : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onFocus" in this.arg.proto)this.arg.proto.onFocus(e);
+                  },
+                  onUnFocus : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onUnFocus" in this.arg.proto)this.arg.proto.onUnFocus(e);
+                  },
+                  onMouseEnter : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onMouseEnter" in this.arg.proto)this.arg.proto.onMouseEnter(e);
+                  },
+                  onMouseLeave : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onMouseLeave" in this.arg.proto)this.arg.proto.onMouseLeave(e);
+                  }
+                }
+              },
+            }));
+          }
+        }
+
+        export class DefaultRound extends Components.Button{
+          constructor(arg:Button.Models.Base){
+
+            if("prop" in arg == false)arg.prop = {};
+
+            super(new Models.Template({
+              type: "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn round ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : arg.text,
+                  style : (new Style).Css({
+                    color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                    "background-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`)
+                  })
+                }
+              },
+              proto : ("proto" in arg ? arg.proto : {}),
+            }));
+          }
+        }
+
+        export class DefaultOutlineRound extends Components.Button{
+          constructor(arg:Button.Models.Base){
+
+            if("prop" in arg == false)arg.prop = {};
+
+            super(new Models.Template({
+              type: "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn outline round ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : arg.text,
+                  style : (new Style).Css({
+                    color : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : {
+                ...arg.proto,
+                ...{
+                  arg : arg,
+                  background : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                  onFocus : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onFocus" in this.arg.proto)this.arg.proto.onFocus(e);
+                  },
+                  onUnFocus : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onUnFocus" in this.arg.proto)this.arg.proto.onUnFocus(e);
+                  },
+                  onMouseEnter : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onMouseEnter" in this.arg.proto)this.arg.proto.onMouseEnter(e);
+                  },
+                  onMouseLeave : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onMouseLeave" in this.arg.proto)this.arg.proto.onMouseLeave(e);
+                  }
+                }
+              },
+            }));
+          }
+        }
+
+        export class Icon extends Components.Button{
+          constructor(arg:Button.Models.Icon){
+            super(new Models.Template({
+              type : "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn icon ${(arg.text == "" ? "single" : "dual")} ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : (function(arg){
+                    if('iconSide' in arg == false)arg.iconSide = 'left';
+                    if(arg.iconSide == 'right' && 'iconURL' in arg) return `${arg.text} <i style=background-image:url(${arg.iconURL})></i>`;
+                    else if(arg.iconSide == 'left' && 'iconURL' in arg) return `<i style=background-image:url(${arg.iconURL})></i> ${arg.text}`;
+                    else if(arg.iconSide == 'right' && 'iconSVG' in arg) return `${arg.text} ${arg.iconSVG}`;
+                    else if(arg.iconSide == 'left' && 'iconSVG' in arg) return `${arg.iconSVG} ${arg.text}`;
+                    else return arg.text;
+                  })(arg),
+                  style : (new Style).Css({
+                    color : ("color" in arg ? `var(--${arg.color})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "background-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : ("proto" in arg ? arg.proto : {})
+            }));
+          }
+        }
+
+        export class IconOutline extends Components.Button{
+          constructor(arg:Button.Models.Icon){
+            super(new Models.Template({
+              type : "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn icon outline ${(arg.text == "" ? "single" : "dual")} ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : (function(arg){
+                    if('iconSide' in arg == false)arg.iconSide = 'left';
+                    if(arg.iconSide == 'right' && 'iconURL' in arg) return `${arg.text} <i style=background-image:url(${arg.iconURL})></i>`;
+                    else if(arg.iconSide == 'left' && 'iconURL' in arg) return `<i style=background-image:url(${arg.iconURL})></i> ${arg.text}`;
+                    else if(arg.iconSide == 'right' && 'iconSVG' in arg) return `${arg.text} ${arg.iconSVG}`;
+                    else if(arg.iconSide == 'left' && 'iconSVG' in arg) return `${arg.iconSVG} ${arg.text}`;
+                    else return arg.text;
+                  })(arg),
+                  style : (new Style).Css({
+                    color : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : {
+                ...arg.proto,
+                ...{
+                  arg : arg,
+                  background : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                  onFocus : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onFocus" in this.arg.proto)this.arg.proto.onFocus(e);
+                  },
+                  onUnFocus : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onUnFocus" in this.arg.proto)this.arg.proto.onUnFocus(e);
+                  },
+                  onMouseEnter : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onMouseEnter" in this.arg.proto)this.arg.proto.onMouseEnter(e);
+                  },
+                  onMouseLeave : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onMouseLeave" in this.arg.proto)this.arg.proto.onMouseLeave(e);
+                  }
+                }
+              },
+            }));
+          }
+        }
+
+        export class IconRound extends Components.Button{
+          constructor(arg:Button.Models.Icon){
+            super(new Models.Template({
+              type : "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn icon round ${(arg.text == "" ? "single" : "dual")} ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : (function(arg){
+                    if('iconSide' in arg == false)arg.iconSide = 'left';
+                    if(arg.iconSide == 'right' && 'iconURL' in arg) return `${arg.text} <i style=background-image:url(${arg.iconURL})></i>`;
+                    else if(arg.iconSide == 'left' && 'iconURL' in arg) return `<i style=background-image:url(${arg.iconURL})></i> ${arg.text}`;
+                    else if(arg.iconSide == 'right' && 'iconSVG' in arg) return `${arg.text} ${arg.iconSVG}`;
+                    else if(arg.iconSide == 'left' && 'iconSVG' in arg) return `${arg.iconSVG} ${arg.text}`;
+                    else return arg.text;
+                  })(arg),
+                  style : (new Style).Css({
+                    color : ("color" in arg ? `var(--${arg.color})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "background-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : ("proto" in arg ? arg.proto : {})
+            }));
+          }
+        }
+
+        export class IconOutlineRound extends Components.Button{
+          constructor(arg:Button.Models.Icon){
+            super(new Models.Template({
+              type : "button",
+              prop : {
+                ...("prop" in arg ? arg.prop : {}),
+                ...{
+                  class : `btn icon outline round ${(arg.text == "" ? "single" : "dual")} ${("size" in arg ? arg.size : "regular")} mr-md-3 mb-2 mb-md-0`,
+                  text : (function(arg){
+                    if('iconSide' in arg == false)arg.iconSide = 'left';
+                    if(arg.iconSide == 'right' && 'iconURL' in arg) return `${arg.text} <i style=background-image:url(${arg.iconURL})></i>`;
+                    else if(arg.iconSide == 'left' && 'iconURL' in arg) return `<i style=background-image:url(${arg.iconURL})></i> ${arg.text}`;
+                    else if(arg.iconSide == 'right' && 'iconSVG' in arg) return `${arg.text} ${arg.iconSVG}`;
+                    else if(arg.iconSide == 'left' && 'iconSVG' in arg) return `${arg.iconSVG} ${arg.text}`;
+                    else return arg.text;
+                  })(arg),
+                  style : (new Style).Css({
+                    color : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                    "border-color" : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  })
+                }
+              },
+              proto : {
+                ...arg.proto,
+                ...{
+                  arg : arg,
+                  background : ("background" in arg ? `var(--${arg.background})` : `var(--primary)`),
+                  color : ("color" in arg ? `var(--${arg.color})` : `var(--white)`),
+                  onFocus : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onFocus" in this.arg.proto)this.arg.proto.onFocus(e);
+                  },
+                  onUnFocus : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onUnFocus" in this.arg.proto)this.arg.proto.onUnFocus(e);
+                  },
+                  onMouseEnter : function(e:Event) {
+                    this.element.style.background = this.background;
+                    this.element.style.color = this.color;
+                    if("proto" in this.arg && "onMouseEnter" in this.arg.proto)this.arg.proto.onMouseEnter(e);
+                  },
+                  onMouseLeave : function(e:Event) {
+                    this.element.style.background = this.color;
+                    this.element.style.color = this.background;
+                    if("proto" in this.arg && "onMouseLeave" in this.arg.proto)this.arg.proto.onMouseLeave(e);
+                  }
+                }
+              },
+            }));
+          }
+        }
+
+      }
+
+    }
+
+  }
 
 }

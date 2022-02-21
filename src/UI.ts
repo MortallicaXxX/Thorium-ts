@@ -55,6 +55,7 @@ export namespace UI{
       };
 
       const component = (new Prototype.Component).define_th(children,this.proto);
+      // if(parent)parent.appendChild(component);
       return component;
     }
 

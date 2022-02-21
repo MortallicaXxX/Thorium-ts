@@ -1,0 +1,20 @@
+{
+  "type" : "app",
+  "prop" : {
+
+  },
+  "childrens" : [
+    {
+      "type" : "div",
+      "childrens" : [
+        {
+          "type" : "p",
+          "prop" : {"text" : "hello world"}
+        }
+      ]
+    }
+  ],
+  "proto" : {
+
+  }
+}

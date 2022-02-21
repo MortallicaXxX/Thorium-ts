@@ -6,9 +6,15 @@ import { Prototype } from "./Prototype";
 import { Style } from "./Style";
 import { DataStorage } from "./DataStorage";
 
+// TODO: Ajout des Components.Controlers
+// TODO: Ajout des Components.Models
+// TODO: Ajout des Components.Style
+// NOTE: TEST
+
 export class Engine{
 
   Vue:UI.GUI = new UI.GUI;
+  isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/) ? true : false);
   Handlers:Handlers.Controls.Events = new Handlers.Controls.Events(this);
   GlobalEvent:Handlers.GlobalEvent = new Handlers.GlobalEvent(this);
   DataStorage:DataStorage.DB =  new DataStorage.DB(this);

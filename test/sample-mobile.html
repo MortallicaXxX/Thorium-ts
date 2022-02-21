@@ -14,11 +14,39 @@
     class Header extends thorium.Mobile.Header{
       constructor(){
         super({
-          childrens : [
-            new thorium.Components.Button({text:"Test"})
-          ]
+          childrens : []
         });
       }
+    }
+
+    class Header_Body_Element1 extends thorium.component{
+
+      constructor(){
+        super(new thorium.Mobile.HeaderElement({
+          prop : {
+            id : "MonElement1"
+          },
+          childrens : [
+            new thorium.Components.Text("Body")
+          ]
+        }))
+      }
+
+    }
+
+    class Header_Contact_Element1 extends thorium.component{
+
+      constructor(){
+        super(new thorium.Mobile.HeaderElement({
+          prop : {
+            id : "MonElement2"
+          },
+          childrens : [
+            new thorium.Components.Text("Profile")
+          ]
+        }))
+      }
+
     }
 
     // Declare Icon fo Menu
@@ -74,6 +102,9 @@
           childrens : [
             new thorium.Components.Text("Body")
           ],
+          // header : [
+          //   Header_Body_Element1
+          // ],
           buttons : [
             profileIcon,
             ContactsIcon,
@@ -85,6 +116,9 @@
     class Profil extends thorium.Mobile.LeftWidget{
       constructor(){
         super({
+          header : [
+            Header_Contact_Element1
+          ],
           childrens : [
             new thorium.Components.Text("Profil")
           ],
@@ -98,6 +132,9 @@
     class Contacts extends thorium.Mobile.RightWidget{
       constructor(){
         super({
+          header : [
+            Header_Contact_Element1
+          ],
           childrens : [
             new thorium.Components.Text("Contacts")
           ],
@@ -112,8 +149,8 @@
     class Mobile_View extends View{
       constructor(){
         super(new thorium.Mobile.App({
-          header : Header,
           menu : Menu,
+          header : Header,
           body : Body,
           widgets : {
             left : [

@@ -39,10 +39,12 @@ export namespace Handlers{
 
       dimensions:Models.ScreenDimensions = {width:window.innerWidth , height:window.innerHeight};
 
-      UpdateDimensions(){
-        this.dimensions = {width:window.innerWidth , height:window.innerHeight};
-        document.body.style.setProperty('--thorium-default-height',window.innerHeight+'px');
-        document.body.style.setProperty('--thorium-default-width',window.innerWidth+'px');
+      UpdateDimensions(engine:Engine){
+        if(!engine.isMobile){
+          this.dimensions = {width:window.innerWidth , height:window.innerHeight};
+          document.body.style.setProperty('--thorium-default-height',window.innerHeight+'px');
+          document.body.style.setProperty('--thorium-default-width',window.innerWidth+'px');
+        }
       }
 
     }
@@ -99,7 +101,7 @@ export namespace Handlers{
         document.body.style.setProperty('--thorium-default-width',window.innerWidth+'px');
 
         window.addEventListener("resize",function(event:Event){
-          _this.Screen.UpdateDimensions();
+          _this.Screen.UpdateDimensions(engine);
         })
 
         window.addEventListener("keydown",function(event:KeyboardEvent){

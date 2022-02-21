@@ -5,20 +5,24 @@ import { View } from "./Views";
 import { Components as components} from "./Components";
 import { Mobile as mobile } from "./Mobile";
 import { Animations as animations } from "./Animations";
+import { Prototype as prototype } from "./Prototype";
 
-class Thorium{
+export class Thorium{
 
   version:number = 2.22;
   UI:typeof ui = ui;
   Models:typeof models = models;
   Engine:Engine = new Engine();
   Components:typeof components = components;
+  Themes:typeof components.Themes = components.Themes;
   Mobile:typeof mobile = mobile;
   Animations:typeof animations = animations;
 
   get Vue():(view:any) => Engine{return this.Engine.View}
   get Show():()=>void{return this.Engine.Show}
   get component():typeof ui.ElementUI{return this.Engine.component}
+  get Model():typeof prototype.Models{return prototype.Models}
+  get Controler():typeof prototype.Controler{return prototype.Controler}
   get app():HTMLElement{return this.Engine.app}
   get Var(){return this.Engine.Var}
   get Style(){return this.Engine.Style}

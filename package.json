@@ -37,6 +37,7 @@
     "json-stringify": "^1.0.0",
     "node-fetch": "^3.0.0",
     "npm-watch": "^0.11.0",
+    "osm": "^1.0.0",
     "package": "^1.0.1"
   },
   "devDependencies": {
@@ -80,5 +81,8 @@
       "snap - 2.0.29 to 2.0.30 at 5/9/2021 10:51:52.361",
       "snap - 2.0.30 to 2.0.31 at 6/9/2021 16:58:48.786"
     ]
+  },
+  "directories": {
+    "test": "test"
   }
 }

@@ -108,11 +108,27 @@ export namespace Prototype{
     define_th(element:any,proto:any){
 
       element.th = {
+        get app(){
+          const x:any = window;
+          return x.thorium.app.th;
+        },
         e : new Variable(element,{writable:false}),
+        get element(){return this.e.Value},
         active : new Variable(false,{writable:true}),
-        Initialise : function(){
-          if("onInitialise" in this)this.onInitialise();
+        get isActive(){return this.active.Value},
+        focus : new Variable(false,{writable:true}),
+        get isFocus(){return this.focus.Value},
+        _parent : new Variable(null,{writable:false}),
+        get parent(){return this._parent.Value},
+        get DOMparent(){return this.e.Value.parentNode},
+        _children : new Variable({},{writable:true}),
+        get children(){return this._children.Value},
+        get DOMchildren(){return this.element.children},
+        Initialise : async function(){
+          this._parent.Value = this.e.Value.parentNode.th;
+          if("onInitialise" in this)await this.onInitialise();
           for(const element of this.e.Value.children){
+            if(element.getAttribute("name"))this._children.Value[element.getAttribute("name")] = element.th;
             try{element.th.Initialise()}catch(err){};
           }
         },
@@ -163,6 +179,9 @@ export namespace Prototype{
             }
             catch(err){}
           }
+        },
+        querySelector : function(arg:string):HTMLElement[]{
+          return this.e.Value.querySelectorAll(arg);
         }
       };
 
@@ -201,6 +220,15 @@ export namespace Prototype{
         mousewheel : function(){
           if("onMouseWheel" in element.th)element.th.onMouseWheel()
         },
+        change : function(){
+          if("onChange" in element.th)element.th.onChange()
+        },
+        focus : function(e){
+          if("onFocus" in element.th)element.th.onFocus(e)
+        },
+        focusout : function(e){
+          if("onUnFocus" in element.th)element.th.onUnFocus(e)
+        }
       }
 
       for(const key of Object.keys(handlers)){
@@ -210,6 +238,20 @@ export namespace Prototype{
       return element;
 
     }
+  }
+
+  export class Models{
+
+  }
+
+  export class Controler{
+    constructor(proto:any){
+      Object.assign(this,proto);
+    }
+  }
+
+  export class Style{
+
   }
 
 }
