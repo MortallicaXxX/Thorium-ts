@@ -40,8 +40,17 @@
                 name : "DefaultOutline"
               },
               proto : {
+                BeforeInitialise(){
+                  console.log("BeforeInitialise",this);
+                },
+                AfterInitialise(){
+                  console.log("AfterInitialise",this);
+                },
                 onMouseEnter : function(){
                   console.log("pipi");
+                },
+                onMouseMove : function(){
+                  console.log({...thorium.Engine.Handlers.Mouse.Buttons});
                 }
               }
             })

@@ -40,7 +40,7 @@ export class Engine{
     global.thorium.Engine.Vue.ui.BuildIn(document.body)
     .then(function(result:any){
       global.thorium.Engine.app = result;
-      global.thorium.Engine.app.th.Initialise();
+      global.thorium.Engine.app.Initialise();
       console.log(result);
     })
   }

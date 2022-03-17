@@ -110,124 +110,141 @@ export namespace Prototype{
       element.th = {
         get app(){
           const x:any = window;
-          return x.thorium.app.th;
+          return x.thorium.app;
         },
-        e : new Variable(element,{writable:false}),
-        get element(){return this.e.Value},
-        active : new Variable(false,{writable:true}),
-        get isActive(){return this.active.Value},
-        focus : new Variable(false,{writable:true}),
-        get isFocus(){return this.focus.Value},
-        _parent : new Variable(null,{writable:false}),
-        get parent(){return this._parent.Value},
-        get DOMparent(){return this.e.Value.parentNode},
-        _children : new Variable({},{writable:true}),
-        get children(){return this._children.Value},
-        get DOMchildren(){return this.element.children},
-        Initialise : async function(){
-          this._parent.Value = this.e.Value.parentNode.th;
-          if("onInitialise" in this)await this.onInitialise();
-          for(const element of this.e.Value.children){
-            if(element.getAttribute("name"))this._children.Value[element.getAttribute("name")] = element.th;
-            try{element.th.Initialise()}catch(err){};
+        _e : new Variable(element,{writable:false}),
+        get element(){return this._e.Value},
+        _initilised : new Variable(false,{writable:true}),
+        get isInitialised(){return this._initilised.Value},
+        _active : new Variable(element.classList.contains('active'),{writable:true}),
+        get isActive(){return this._active.Value},
+        _focus : new Variable(false,{writable:true}),
+        get isFocus(){return this._focus.Value},
+        _clicked : new Variable(false,{writable:true}),
+        get isMouseDown(){return this._clicked.Value},
+        // _parent : new Variable(null,{writable:false}),
+        // get parent(){return this._parent.Value},
+        // get DOMparent(){return this.e.Value.parentNode},
+        // _children : new Variable({},{writable:true}),
+        // get children(){return this._children.Value},
+        // get DOMchildren(){return this.element.children},
+        async Initialise(){
+
+          const _this:any = this;
+
+          async function InitChildrens(element:any){
+            for(const e of element.children){
+              try{await e.Initialise()}catch(err){};
+            }
           }
+
+          async function AfterInitialise(element:any){
+            if("AfterInitialise" in element)element.AfterInitialise()
+          }
+
+          if(this.getAttribute('name'))this.parentNode.__defineGetter__(this.getAttribute('name'),function(){return _this;})
+
+          if("BeforeInitialise" in this && !this.isInitialised)await this.BeforeInitialise();
+          await InitChildrens(_this);
+          if("AfterInitialise" in this && !this.isInitialised)await this.AfterInitialise();
+          this._initilised.Value = true;
+
         },
-        Update : function(){
+        remove(){
+          if(this.getAttribute('name'))delete this.parentNode[this.getAttribute('name')];
+          this.outerHTML = "";
+        },
+        Update(){
           if("onUpdate" in this)this.onUpdate();
-          for(const element of this.e.Value.children){
-            try{element.th.Update()}catch(err){}
+          for(const element of this.children){
+            if('Update' in element)element.Update();
           }
         },
-        Resize : function(){
+        Resize(){
           if("onResize" in this)this.onResize();
-          for(const element of this.e.Value.children){
-            try{element.th.Resize()}catch(err){}
+          for(const element of this.children){
+            if('Resize' in element)element.Resize();
           }
         },
-        Reset : function(){
+        Reset(){
           if("onReset" in this)this.onReset();
-          for(const element of this.e.Value.children){
-            try{element.th.Reset()}catch(err){}
+          for(const element of this.children){
+            if('Reset' in element)element.Reset();
           }
         },
-        FrameUpdate : function(cpuStats:Models.cpu){
+        FrameUpdate(cpuStats:Models.cpu){
           if("onFrameUpdate" in this)this.onFrameUpdate(cpuStats);
-          for(const element of this.e.Value.children){
-            try{element.th.FrameUpdate(cpuStats)}catch(err){}
+          for(const element of this.children){
+            if('FrameUpdate' in element)element.FrameUpdate();
           }
         },
-        turnActive : function() {
-          var element = this.e.Value;
-          if(this.active.Value == false){
-            element.classList.add('active');
-            this.active.Value = true;
-            // appel de la fonction onActive si présente
+        turnActive() {
+          if(!this.isActive){
+            this.classList.add('active');
+            this._active.Value = true;
             if('onActive' in this)this.onActive();
           }
           else {
-            element.classList.remove('active');
-            this.active.Value = false;
+            this.classList.remove('active');
+            this._active.Value = false;
             if('onUnActive' in this)this.onUnActive();
           }
         },
-        radioLike : function(){
+        radioLike(){
           this.turnActive();
-          for(var e of this.e.Value.parentNode.children){
-            try{
-              var active = e.th.active.Value;
-              if(active == true && e != this.e.Value)e.th.turnActive();
-            }
-            catch(err){}
+          for(var e of this.parentNode.children){
+            if(e.isActive && e != this)e.turnActive();
           }
         },
-        querySelector : function(arg:string):HTMLElement[]{
-          return this.e.Value.querySelectorAll(arg);
-        }
+        ...(proto?proto:{})
       };
 
-      for(const key of Object.keys(proto)){
-        element.th[key] = proto[key];
+      for(const key of Object.keys(element.th)){
+        element.__defineGetter__(key,function(){return element.th[key]});
+        element.__defineSetter__(key,function(value){element.th[key] = value});
       }
 
       const handlers = {
-        click : function(){
-          if("onClick" in element.th)element.th.onClick()
+        click : function(e){
+          if("onClick" in element)element.onClick(e)
         },
-        dblclick : function(){
-          if("onDblClick" in element.th)element.th.onDblClick()
+        dblclick : function(e){
+          if("onDblClick" in element)element.onDblClick(e)
         },
-        mouseenter : function(){
-          if("onMouseEnter" in element.th)element.th.onMouseEnter()
+        mouseenter : function(e){
+          if("onMouseEnter" in element)element.onMouseEnter(e)
         },
-        mouseleave : function(){
-          if("onMouseLeave" in element.th)element.th.onMouseLeave()
+        mouseleave : function(e){
+          if("onMouseLeave" in element)element.onMouseLeave(e)
         },
-        mousemove : function(){
-          if("onMouseMove" in element.th)element.th.onMouseMove()
+        mousemove : function(e){
+          if("onMouseMove" in element)element.onMouseMove(e)
         },
-        mouseout : function(){
-          if("onMouseOut" in element.th)element.th.onMouseOut()
+        mouseout : function(e){
+          if("onMouseOut" in element)element.onMouseOut(e)
         },
-        mouseover : function(){
-          if("onMouseOver" in element.th)element.th.onMouseOver()
+        mouseover : function(e){
+          if("onMouseOver" in element)element.onMouseOver(e)
         },
-        mouseup : function(){
-          if("onMouseUp" in element.th)element.th.onMouseUp()
+        mouseup : function(e){
+          this._clicked.Value = false;
+          if("onMouseUp" in element)element.onMouseUp(e)
         },
-        mousedown : function(){
-          if("onMouseDown" in element.th)element.th.onMouseDown()
+        mousedown : function(e){
+          this._clicked.Value = true;
+          if("onMouseDown" in element)element.onMouseDown(e)
         },
-        mousewheel : function(){
-          if("onMouseWheel" in element.th)element.th.onMouseWheel()
+        mousewheel : function(e){
+          if("onMouseWheel" in element)element.onMouseWheel(e)
         },
-        change : function(){
-          if("onChange" in element.th)element.th.onChange()
+        change : function(e){
+          if("onChange" in element)element.onChange(e)
         },
         focus : function(e){
-          if("onFocus" in element.th)element.th.onFocus(e)
+          if("onFocus" in element)element.onFocus(e)
         },
         focusout : function(e){
-          if("onUnFocus" in element.th)element.th.onUnFocus(e)
+          if("onUnFocus" in element)element.onUnFocus(e)
         }
       }
 

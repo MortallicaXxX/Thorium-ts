@@ -52,10 +52,11 @@ export namespace Handlers{
     class Mouse{
 
       position:Models.MousePosition;
-      Buttons:[boolean,boolean] = [false,false];
+      Buttons:{left:boolean,center:boolean,right:boolean} = {left:false,center:false,right:false};
       isClicked:boolean = false;
-      get Right():boolean{return this.Buttons[0]}
-      get Left():boolean{return this.Buttons[1]}
+      get Right():boolean{return this.Buttons.right}
+      get Center():boolean{return this.Buttons.center}
+      get Left():boolean{return this.Buttons.left}
 
       UpdatePosition(event:MouseEvent){
         this.position = {x:event.x , y:event.y};
@@ -63,7 +64,8 @@ export namespace Handlers{
 
       UpdateClick(isClicked:boolean,event:MouseEvent){
         this.isClicked = isClicked;
-        this.Buttons[event.button - 1] = isClicked;
+        this.Buttons[Object.keys(this.Buttons)[event.button]] = isClicked;
+        // console.log({...this});
       }
 
     }
