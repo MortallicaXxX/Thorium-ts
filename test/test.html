@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script src="../dist/index.js"></script>
+  <script type="text/javascript">
+
+  class app extends thorium.Components.App{
+    constructor(){
+      super({
+        prop : {
+          name : 'app',
+          text : 'Hello World'
+        },
+        proto : {
+          BeforeInitialise(){
+            console.log('Hello',this);
+          },
+          AfterInitialise(){
+            console.log('World!');
+          },
+          onMouseOver(){
+            console.log(this);
+          },
+          onFrameUpdate(e){
+            console.log(e);
+          }
+        }
+      });
+    }
+  }
+
+  class AppView extends View{
+    constructor(){
+      super(new app());
+    }
+  }
+
+  thorium.Vue(AppView).Show();
+
+  </script>
+</html>

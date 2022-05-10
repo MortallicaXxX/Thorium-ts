@@ -2,7 +2,7 @@
   "name": "thoriumjs",
   "version": "2.0.31",
   "description": "Framework client-side javascrit",
-  "main": "index.js",
+  "main": "dist/index.js",
   "watch": {
     "build-WebPack": {
       "patterns": [
@@ -43,8 +43,10 @@
   "devDependencies": {
     "@types/node": "^16.4.13",
     "clean-webpack-plugin": "^3.0.0",
+    "none": "^1.0.0",
     "ts-loader": "^9.2.5",
-    "typescript": "^4.3.5",
+    "typedoc": "^0.22.15",
+    "typescript": "^4.6.4",
     "webpack": "^5.49.0",
     "webpack-cli": "^4.7.2"
   },
