@@ -4,7 +4,7 @@
     "target": "ES2016",
     "declaration": true,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist/lib",
     "removeComments": true,
     "preserveConstEnums" : true,
     "skipLibCheck": true,

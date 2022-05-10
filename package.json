@@ -4,6 +4,7 @@
   "description": "Framework client-side javascrit",
   "main": "dist/index.js",
   "watch": {
+    "compile" : {},
     "build-WebPack": {
       "patterns": [
         "src",
@@ -17,6 +18,7 @@
   },
   "scripts": {
     "build-WebPack": "webpack",
+    "compile" : "npx tsc",
     "watch": "npm-watch"
   },
   "repository": {

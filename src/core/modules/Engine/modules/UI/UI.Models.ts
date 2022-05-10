@@ -1,4 +1,4 @@
-import {Prototype} from "../Prototype/Prototype";
+import * as Prototype from "../Prototype/Prototype";
 import {
   Template as TemplateInterface,
   ElementUI as ElementInterface,
