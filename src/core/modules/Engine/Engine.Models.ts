@@ -1,15 +1,18 @@
-import { UI } from "./modules/UI/UI";
-import { Handlers } from "./modules/Handlers/Handlers";
-import { Cpu } from "./modules/Cpu/Cpu";
+import * as UI from "./modules/UI/UI";
+import * as Handlers from "./modules/Handlers/Handlers";
+import * as Cpu from "./modules/Cpu/Cpu";
 import * as Prototype from "./modules/Prototype/Prototype";
 import * as Style from "./modules/Style/Style";
-import { DataStorage } from "./modules/DataStorage/DataStorage";
-import { EngineInterface } from "./Engine.Interfaces";
-import { Thorium , ThoriumWindow , ThoriumInterface} from '../../Core';
-
-export {
+import * as DataStorage from "./modules/DataStorage/DataStorage";
+import {
   EngineInterface
-};
+} from "./Engine.Interfaces";
+
+import {
+  Thorium
+} from '../../Core';
+
+export {EngineInterface};
 
 export const Engine = new class Engine implements EngineInterface{
   Vue:UI.GlobalUserInterface = new UI.GUI;
@@ -28,14 +31,15 @@ export const Engine = new class Engine implements EngineInterface{
     return new Prototype.Variable(value,options);
   }
 
-  View(view:any):EngineInterface{
-    const global:any = window;
-    global.thorium.Engine.setGeneralUserInterface((new view).Main());
+  View(view:any):Engine{
+    this.setGeneralUserInterface((new view).Main());
     return this;
   }
 
   Show():void{
-    const thorium:ThoriumInterface = (window as ThoriumWindow).thorium;
+    const thorium:typeof Thorium = (window as Thorium.ThoriumWindow).thorium;
+    console.log("Show");
+    console.log(thorium.Engine.Vue.ui);
     thorium.Engine.Vue.ui.BuildIn(document.body)
     .then(function(result:any){
       thorium.Engine.app = result;
@@ -44,6 +48,7 @@ export const Engine = new class Engine implements EngineInterface{
   }
 
   setGeneralUserInterface(template:UI.TemplateInterface):void{
+    console.log("setGeneralUserInterface",template);
     this.Vue = new UI.GUI(template);
   }
 

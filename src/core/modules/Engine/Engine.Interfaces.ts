@@ -1,9 +1,9 @@
-import { UI } from "./modules/UI/UI";
-import { Handlers } from "./modules/Handlers/Handlers";
-import { Cpu } from "./modules/Cpu/Cpu";
+import * as UI from "./modules/UI/UI";
+import * as Handlers from "./modules/Handlers/Handlers";
+import * as Cpu from "./modules/Cpu/Cpu";
 import * as Prototype from "./modules/Prototype/Prototype";
 import { Style , StyleInterface} from "./modules/Style/Style";
-import { DataStorage } from "./modules/DataStorage/DataStorage";
+import * as DataStorage from "./modules/DataStorage/DataStorage";
 
 export interface EngineInterface {
 

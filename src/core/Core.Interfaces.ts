@@ -1,16 +1,17 @@
 import { ThoriumGlobal } from "./Core.Types";
-import { Engine , EngineInterface } from './modules/Engine/Engine';
-import { UI as UserInterface } from "./modules/Engine/modules/UI/UI";
-import { View } from "./modules/Engine/modules/View/Views";
+import { EngineInterface } from './modules/Engine/Engine';
+import * as UserInterface from "./modules/Engine/modules/UI/UI";
 import { Components } from "./modules/Engine/modules/Components/Components";
 import { StyleInterface } from "./modules/Engine/modules/Style/Style";
 import { Variable } from "./modules/Engine/modules/Prototype/Prototype";
+
+import { Thorium } from './Core';
 
 export {ThoriumGlobal};
 
 export interface ThoriumWindow extends ThoriumGlobal{
   /** Description : */
-  thorium:ThoriumInterface;
+  thorium:typeof Thorium;
   /** Description : */
   Var:(value:any,options?:any)=>Variable<any>;
   /** Description : */

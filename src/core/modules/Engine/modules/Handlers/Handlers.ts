@@ -1,2 +1,12 @@
-import * as Handlers from './Handlers.Models';
-export {Handlers};
+export {
+  GlobalEventInterface,
+  MousePositionInterface,
+  MouseButtonsInterface,
+  MouseInterface,
+  ScreenDimensionsInterface,
+  ScreenInterface,
+  KeyboardInterface,
+  EventInterface,
+  GlobalEvent,
+  Controls
+} from './Handlers.Models';

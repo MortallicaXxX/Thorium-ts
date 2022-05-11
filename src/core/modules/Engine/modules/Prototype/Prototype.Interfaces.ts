@@ -1,4 +1,6 @@
-import { Cpu } from '../Cpu/Cpu';
+import * as Cpu from '../Cpu/Cpu';
+
+import { Ghost } from './Prototype.Types';
 
 export interface VariableInterface<T>{
   Value?: T;
@@ -19,18 +21,49 @@ export interface __th__ListenersInterface{
   remove():void;
 }
 
+export interface __th__Ghost extends Ghost{
+  app?:any;
+  element?:HTMLthoriumElement;
+  isInitialised?:boolean;
+  isActive?:boolean;
+  isFocus?:boolean;
+  isMouseDown?:boolean;
+  BeforeInitialise?():void|Promise<void>;
+  AfterInitialise?():void|Promise<void>;
+  onClick?():void;
+  onDblClick?():void;
+  onMouseEnter?():void;
+  onMouseLeave?():void;
+  onMouseMove?():void;
+  onMouseOut?():void;
+  onMouseOver?():void;
+  onMouseUp?():void;
+  /** Fire when click */
+  onMouseDown?():void;
+  onMouseWheel?():void;
+  onChange?():void;
+  onFocus?():void;
+  onUnFocus?():void;
+  onUpdate?():void;
+  onResize?():void;
+  onReset?():void;
+  onFrameUpdate?(cpuStats:Cpu.CpuInterface):void;
+  onActive?():void;
+  onUnActive?():void;
+}
+
 export interface __th__{
-  get app():any;
-  _e:VariableInterface<HTMLthoriumElement>;
-  get element():HTMLthoriumElement;
-  _initilised:VariableInterface<boolean>;
-  get isInitialised():boolean;
-  _active:VariableInterface<boolean>;
-  get isActive():boolean;
-  _focus:VariableInterface<boolean>;
-  get isFocus():boolean;
-  _clicked:VariableInterface<boolean>;
-  get isMouseDown():boolean;
+  app?:any;
+  _e?:VariableInterface<HTMLthoriumElement>;
+  element?:HTMLthoriumElement;
+  _initilised?:VariableInterface<boolean>;
+  isInitialised?:boolean;
+  _active?:VariableInterface<boolean>;
+  isActive?:boolean;
+  _focus?:VariableInterface<boolean>;
+  isFocus?:boolean;
+  _clicked?:VariableInterface<boolean>;
+  isMouseDown?:boolean;
   BeforeInitialise?():void|Promise<void>;
   AfterInitialise?():void|Promise<void>;
   onClick?():void;

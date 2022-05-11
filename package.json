@@ -19,6 +19,7 @@
   "scripts": {
     "build-WebPack": "webpack",
     "compile" : "npx tsc",
+    "doc":"npx typedoc src/index.ts",
     "watch": "npm-watch"
   },
   "repository": {

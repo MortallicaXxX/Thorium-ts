@@ -1,5 +1,5 @@
 import { EngineInterface } from '../../Engine';
-import { Cpu } from '../Cpu/Cpu';
+import * as Cpu from '../Cpu/Cpu';
 
 export interface GlobalEventInterface {
   engine:EngineInterface;

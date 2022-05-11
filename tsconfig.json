@@ -1,4 +1,9 @@
 {
+  "typedocOptions": {
+    "entryPoints": ["src/core/Core.ts"],
+    "out": "docs/Documentation/",
+    "json": "docs/Api/Api.json"
+  },
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES2016",

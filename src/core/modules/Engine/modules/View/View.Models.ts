@@ -1,4 +1,4 @@
-import { UI } from "../UI/UI";
+import * as UI from "../UI/UI";
 import { ViewInterface } from "./View.Interfaces";
 
 export {

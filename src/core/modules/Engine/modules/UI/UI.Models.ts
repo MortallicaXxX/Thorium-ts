@@ -20,12 +20,12 @@ export class Template implements TemplateInterface{
   childrens:NodeInterface = new NodeUI;
   proto:object = {};
 
-  constructor(template?:{type:string,prop?:object|null,childrens?:NodeInterface|object[],proto?:object|null}){
+  constructor(template?:TemplateInterface){
     if(template)this.Main(template);
   }
 
-  Main(template:{type:string,prop?:object|null,childrens?:NodeInterface|object[],proto?:object|null}){
-    this.type = template.type;
+  Main(template:TemplateInterface){
+    if(template.type)this.type = template.type;
     if(template.prop)this.prop = template.prop;
     if(template.childrens)this.childrens = (Array.isArray(template.childrens)? new NodeUI(template.childrens) : template.childrens)
     if(template.proto)this.proto = template.proto;

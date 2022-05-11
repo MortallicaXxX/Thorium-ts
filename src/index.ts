@@ -1,8 +1,32 @@
-import { ThoriumWindow , Thorium , View , Style , Variable } from './core/Core';
+import { Thorium , View , Style , Prototype , UserInterface , ProtoGhost} from './core/Core';
 
-(function(w:ThoriumWindow):void{
-  w.thorium = Thorium;
-  w.Var = function(value:any,options?:any){return new Variable(value,options)}
-  w.Style = Style;
-  w.View = View;
-})(window as ThoriumWindow);
+const App = new class App extends Thorium.Components.Div{
+
+  constructor(){
+    super({
+      prop : {
+        id : 'app',
+        text : 'Hello ts-World!'
+      },
+      proto : new class appProto implements ProtoGhost{
+        x:string = "10";
+        test = function( ){
+          (this as ProtoGhost).innerHTML = (this as appProto).x;
+        }
+        onMouseDown = function( ){
+          (this as appProto).test();
+        }
+      }
+    })
+  }
+}
+
+const AppView = class AppView extends View.View{
+
+  constructor(){
+    super(App);
+  }
+
+}
+
+Thorium.Vue(AppView).Show();

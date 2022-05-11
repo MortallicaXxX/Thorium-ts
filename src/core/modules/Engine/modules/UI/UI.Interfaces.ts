@@ -1,9 +1,9 @@
 export interface Template{
-  type:string;
-  prop:object;
-  childrens:NodeUI;
-  proto:object;
-  Main(template:{type:string,prop?:object|null,childrens?:NodeUI|object[],proto?:object|null}):void;
+  type?:string;
+  prop?:object;
+  childrens?:NodeUI|object[];
+  proto?:object;
+  Main?(template:{type:string,prop?:object|null,childrens?:NodeUI|object[],proto?:object|null}):void;
 }
 
 export interface ElementUI{

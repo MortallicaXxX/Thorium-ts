@@ -1,5 +1,5 @@
 import { Engine , EngineInterface} from "../../../Engine/Engine";
-import { Cpu } from "../Cpu/Cpu";
+import * as Cpu from "../Cpu/Cpu";
 import {
   GlobalEventInterface,
   MousePositionInterface,

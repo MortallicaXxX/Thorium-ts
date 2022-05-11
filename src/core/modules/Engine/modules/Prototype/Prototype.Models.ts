@@ -1,9 +1,9 @@
-import { Cpu } from "../Cpu/Cpu";
+import * as Cpu from "../Cpu/Cpu";
 import {
   VariableInterface,
   ComponentInterface,
   __th__ListenersInterface,
-  __th__ as ThInterface,
+  __th__ as ThInterface, __th__Ghost ,
   HTMLthoriumElement
 } from './Prototype.Interfaces';
 
@@ -11,7 +11,7 @@ export {
   VariableInterface,
   ComponentInterface,
   __th__ListenersInterface,
-  ThInterface,
+  ThInterface, __th__Ghost,
   HTMLthoriumElement
 }
 
@@ -212,22 +212,26 @@ export const __th__Listeners = new class __th__Listeners implements __th__Listen
 
 }
 
+// export class __th__Ghost implements ThInterface{
+//
+// }
+
 export class __th__ implements ThInterface{
 
   get app(){
     const x:any = window;
     return x.thorium.app;
-  };
-  _e:VariableInterface<HTMLthoriumElement>;
+  }
+  _e?:VariableInterface<HTMLthoriumElement>;
   get element():HTMLthoriumElement{return this._e.Value};
-  _initilised:VariableInterface<boolean>;
+  _initilised?:VariableInterface<boolean>;
   get isInitialised():boolean{return this._initilised.Value};
-  _active:VariableInterface<boolean>;
-  get isActive():boolean{return this._active.Value};
-  _focus:VariableInterface<boolean>;
-  get isFocus():boolean{return this._focus.Value};
-  _clicked:VariableInterface<boolean>;
-  get isMouseDown():boolean{return this._clicked.Value};
+  _active?:VariableInterface<boolean>;
+  get isActive():boolean{return this._active?.Value}
+  _focus?:VariableInterface<boolean>;
+  get isFocus():boolean{return this._focus?.Value}
+  _clicked?:VariableInterface<boolean>;
+  get isMouseDown():boolean{return this._clicked?.Value}
 
   constructor(element:any,proto:any){
     this._e = new Variable(element,{writable:false});

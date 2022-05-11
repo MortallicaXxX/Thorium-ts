@@ -1,2 +1,4 @@
-import * as Cpu from "./Cpu.Models";
-export {Cpu};
+export {
+  Cpu,
+  CpuInterface
+} from "./Cpu.Models";

@@ -1,4 +1,4 @@
-import {UI} from "../UI/UI";
+import * as UI from "../UI/UI";
 import { Style } from "../Style/Style";
 
 export namespace Components{
