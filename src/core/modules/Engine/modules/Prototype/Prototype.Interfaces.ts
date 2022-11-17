@@ -22,24 +22,28 @@ export interface __th__ListenersInterface{
 }
 
 export interface __th__Ghost extends Ghost{
+  observable?:any;
   app?:any;
   element?:HTMLthoriumElement;
   isInitialised?:boolean;
   isActive?:boolean;
   isFocus?:boolean;
   isMouseDown?:boolean;
+  context?:(x)=>HTMLthoriumElement;
+  onContextMenu?(e:any):void;
   BeforeInitialise?():void|Promise<void>;
   AfterInitialise?():void|Promise<void>;
-  onClick?():void;
-  onDblClick?():void;
-  onMouseEnter?():void;
-  onMouseLeave?():void;
-  onMouseMove?():void;
-  onMouseOut?():void;
-  onMouseOver?():void;
-  onMouseUp?():void;
+  onMutation?(mutations:MutationRecord):void;
+  onClick?(e:any):void;
+  onDblClick?(e:any):void;
+  onMouseEnter?(e:any):void;
+  onMouseLeave?(e:any):void;
+  onMouseMove?(e:any):void;
+  onMouseOut?(e:any):void;
+  onMouseOver?(e:any):void;
+  onMouseUp?(event:any):void;
   /** Fire when click */
-  onMouseDown?():void;
+  onMouseDown?(event:any):void;
   onMouseWheel?():void;
   onChange?():void;
   onFocus?():void;
@@ -47,12 +51,19 @@ export interface __th__Ghost extends Ghost{
   onUpdate?():void;
   onResize?():void;
   onReset?():void;
+  onDragStart?(e):void;
+  onDragStop?(e):void;
+  onDragOver?(e):void;
+  onDragEnter?(e):void;
+  onDragLeave?(e):void;
+  onDrop?(e):void;
   onFrameUpdate?(cpuStats:Cpu.CpuInterface):void;
   onActive?():void;
   onUnActive?():void;
 }
 
 export interface __th__{
+  observable?:any;
   app?:any;
   _e?:VariableInterface<HTMLthoriumElement>;
   element?:HTMLthoriumElement;
@@ -64,17 +75,19 @@ export interface __th__{
   isFocus?:boolean;
   _clicked?:VariableInterface<boolean>;
   isMouseDown?:boolean;
+  context?:(x)=>HTMLthoriumElement;
+  onContextMenu?(e:any):void;
   BeforeInitialise?():void|Promise<void>;
   AfterInitialise?():void|Promise<void>;
-  onClick?():void;
-  onDblClick?():void;
-  onMouseEnter?():void;
-  onMouseLeave?():void;
-  onMouseMove?():void;
-  onMouseOut?():void;
-  onMouseOver?():void;
-  onMouseUp?():void;
-  onMouseDown?():void;
+  onClick?(e:any):void;
+  onDblClick?(e:any):void;
+  onMouseEnter?(e:any):void;
+  onMouseLeave?(e:any):void;
+  onMouseMove?(e:any):void;
+  onMouseOut?(e:any):void;
+  onMouseOver?(e:any):void;
+  onMouseUp?(event:any):void;
+  onMouseDown?(event:any):void;
   onMouseWheel?():void;
   onChange?():void;
   onFocus?():void;
@@ -82,6 +95,12 @@ export interface __th__{
   onUpdate?():void;
   onResize?():void;
   onReset?():void;
+  onDragStart?(e):void;
+  onDragStop?(e):void;
+  onDragOver?(e):void;
+  onDragEnter?(e):void;
+  onDragLeave?(e):void;
+  onDrop?(e):void;
   onFrameUpdate?(cpuStats:Cpu.CpuInterface):void;
   onActive?():void;
   onUnActive?():void;

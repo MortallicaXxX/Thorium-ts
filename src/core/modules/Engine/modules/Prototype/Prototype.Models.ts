@@ -1,4 +1,5 @@
 import * as Cpu from "../Cpu/Cpu";
+import Mutations , { AttributesOberserver } from '../Mutations/src/mutation';
 import {
   VariableInterface,
   ComponentInterface,
@@ -188,16 +189,15 @@ export const __th__Listeners = new class __th__Listeners implements __th__Listen
   };
   turnActive() {
     const _this:any = this;
-    const t:HTMLthoriumElement = _this;
-    if(!t.isActive){
-      t.classList.add('active');
-      t._active.Value = true;
-      if('onActive' in t)t.onActive();
+    if(!_this.th.isActive){
+      _this.classList.add('active');
+      _this._active.Value = true;
+      if('onActive' in _this)_this.onActive();
     }
     else {
-      t.classList.remove('active');
-      t._active.Value = false;
-      if('onUnActive' in t)t.onUnActive();
+      _this.classList.remove('active');
+      _this._active.Value = false;
+      if('onUnActive' in _this)_this.onUnActive();
     }
   };
   radioLike(){
@@ -205,8 +205,8 @@ export const __th__Listeners = new class __th__Listeners implements __th__Listen
     const t:HTMLthoriumElement = _this;
     t.turnActive();
     for(const element of t.parentNode.children){
-      const e = (element as HTMLthoriumElement);
-      if(e.isActive && e != t)e.turnActive();
+      const e = (element as any);
+      if(e.th.isActive && e != t)e.turnActive();
     }
   }
 
@@ -232,13 +232,32 @@ export class __th__ implements ThInterface{
   get isFocus():boolean{return this._focus?.Value}
   _clicked?:VariableInterface<boolean>;
   get isMouseDown():boolean{return this._clicked?.Value}
+  // get context():any{
+  //   if(this.element.classList.contains('context'))return this.element;
+  //   else if(((this.element.parentNode as any).tagName == 'BODY'))return this.element;
+  //   else return (this.element.parentNode as any).th.context;
+  // }
+  context:()=>HTMLthoriumElement = function(){
+
+    const findContext = (element:HTMLElement|ParentNode) => {
+      if((element.parentNode as Element).classList.contains('context'))return element.parentNode;
+      else if(((element.parentNode as Element).tagName == 'APP'))return element;
+      else return findContext(element.parentNode);
+    }
+
+    return findContext(this);
+
+  }
 
   constructor(element:any,proto:any){
+
     this._e = new Variable(element,{writable:false});
     this._initilised = new Variable(false,{writable:true});
     this._active = new Variable(this.element.classList.contains('active'),{writable:true});
     this._focus = new Variable(false,{writable:true});
     this._clicked = new Variable(false,{writable:true});
+
+    // if(proto.observedAttributes){element.__defineGetter__('observedAttributes',proto.observedAttributes);}
 
     Object.assign(this , proto);
     Object.assign(element , {
@@ -257,7 +276,7 @@ export class __th__ implements ThInterface{
 }
 
 export class Component implements ComponentInterface{
-  define_th(element:any,proto:any){
+  define_th(element:any,proto:any,observables?:any){
 
     element.th = new __th__(element,proto);
 
@@ -265,6 +284,10 @@ export class Component implements ComponentInterface{
       element.__defineGetter__(key,function(){return element.th[key]});
       element.__defineSetter__(key,function(value){element.th[key] = value});
     }
+
+    if(observables)element.th.observable = AttributesOberserver(element , observables , function(event:MutationRecord[]){
+      if('onMutation' in element)for(const e of event){element.onMutation(e)}
+    })
 
     const handlers = {
       click : function(e){
@@ -307,6 +330,30 @@ export class Component implements ComponentInterface{
       },
       focusout : function(e){
         if("onUnFocus" in element)element.onUnFocus(e)
+      },
+      dragstart : function(e){
+        if("onDragStart" in element)element.onDragStart(e)
+      },
+      dragend : function(e){
+        if("onDragEnd" in element)element.onDragEnd(e)
+      },
+      dragover : function(e){
+        if("onDragOver" in element)element.onDragOver(e)
+      },
+      dragenter : function(e){
+        if("onDragEnter" in element)element.onDragEnter(e)
+      }, 
+      dragleave : function(e){
+        if("onDragLeave" in element)element.onDragLeave(e)
+      },
+      drop : function(e){
+        if("onDrop" in element)element.onDrop(e)
+      },
+      submit : function(e){
+        if('onSubmit' in element)element.onSubmit(e);
+      },
+      contextmenu : function(e){
+        if('onContextMenu' in element)element.onContextMenu(e);
       }
     }
 

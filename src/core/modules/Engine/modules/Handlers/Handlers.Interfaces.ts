@@ -5,7 +5,7 @@ export interface GlobalEventInterface {
   engine:EngineInterface;
   Initialise():void;
   Update():void;
-  Resize():void;
+  Resize(event?:Event):void;
   FrameUpdate(cpuStats:Cpu.CpuInterface):void;
 }
 
@@ -51,4 +51,6 @@ export interface EventInterface{
   Screen:ScreenInterface;
   Keyboard:KeyboardInterface;
   Engine:EngineInterface;
+  Add:(eventLabel:string , callback:(event:Event|KeyboardEvent|MouseEvent)=>void)=>string;
+  Remove(eventLabel:string);
 }

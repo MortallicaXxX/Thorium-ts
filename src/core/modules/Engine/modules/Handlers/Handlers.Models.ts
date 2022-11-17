@@ -31,13 +31,13 @@ export class GlobalEvent implements GlobalEventInterface{
   }
 
   Initialise(){
-    this.engine.app.th.Initialise();
+    this.engine.app.Initialise();
   }
   Update(){
-    this.engine.app.th.Update();
+    this.engine.app.Update();
   }
-  Resize(){
-    this.engine.app.th.Resize();
+  Resize(event?:Event){
+    this.engine.app.Resize(event);
   }
   FrameUpdate(cpuStats:Cpu.CpuInterface){
     this.engine.CpuStats = cpuStats;
@@ -112,38 +112,58 @@ export namespace Controls{
     Screen:Screen = new Screen();
     Keyboard:Keyboard = new Keyboard();
     Engine:EngineInterface;
+    Listeners:Record<string,Map<string,(event?:Event) => void>> = {};
 
     constructor(engine:EngineInterface){
       this.Engine = engine;
-      const _this:Events = this;
 
       document.body.style.setProperty('--thorium-default-height',window.innerHeight+'px');
       document.body.style.setProperty('--thorium-default-width',window.innerWidth+'px');
 
-      window.addEventListener("resize",function(event:Event){
-        _this.Screen.UpdateDimensions(engine);
+      window.addEventListener("resize",(event:Event) => {
+        this.Screen.UpdateDimensions(engine);
+        this.Engine.GlobalEvent.Resize();
+        if(this.Listeners.resize)Array.from(this.Listeners.resize?.values() , (callback) => {return callback(event)})
       })
 
-      window.addEventListener("keydown",function(event:KeyboardEvent){
-        _this.Keyboard.UpdateKey(true,event);
+      window.addEventListener("keydown",(event:KeyboardEvent) => {
+        this.Keyboard.UpdateKey(true,event);
+        if(this.Listeners.keydown)Array.from(this.Listeners.keydown?.values() , (callback) => {return callback(event)})
       })
 
-      window.addEventListener("keyup",function(event:KeyboardEvent){
-        _this.Keyboard.UpdateKey(false,event);
+      window.addEventListener("keyup",(event:KeyboardEvent) => {
+        this.Keyboard.UpdateKey(false,event);
+        if(this.Listeners.keyup)Array.from(this.Listeners.keyup?.values() , (callback) => {return callback(event)})
       })
 
-      window.addEventListener("mousemove",function(event:MouseEvent){
-        _this.Mouse.UpdatePosition(event);
+      window.addEventListener("mousemove",(event:MouseEvent) => {
+        this.Mouse.UpdatePosition(event);
+        if(this.Listeners.mousemove)Array.from(this.Listeners.mousemove?.values() , (callback) => {return callback(event)})
       })
 
-      window.addEventListener("mousedown",function(event:MouseEvent){
-        _this.Mouse.UpdateClick(true,event);
+      window.addEventListener("mousedown",(event:MouseEvent) => {
+        this.Mouse.UpdateClick(true,event);
+        if(this.Listeners.mousedown)Array.from(this.Listeners.mousedown?.values() , (callback) => {return callback(event)})
       })
 
-      window.addEventListener("mouseup",function(event:MouseEvent){
-        _this.Mouse.UpdateClick(false,event);
+      window.addEventListener("mouseup",(event:MouseEvent) => {
+        this.Mouse.UpdateClick(false,event);
+        if(this.Listeners.mouseup)Array.from(this.Listeners.mouseup?.values() , (callback) => {return callback(event)})
       })
 
+    }
+
+    Add(eventLabel:string , callback:(event:Event|KeyboardEvent|MouseEvent)=>void):string{
+      const eventId = crypto.randomUUID();
+      if(!this.Listeners[eventLabel])this.Listeners[eventLabel] = new Map();
+      this.Listeners[eventLabel].set(eventId,callback);
+      return eventId;
+    }
+
+    Remove(eventId:string){
+      Array.from(Object.keys(this.Listeners) , (key) => {
+        if(this.Listeners[key].has(eventId))this.Listeners[key].delete(eventId);
+      })
     }
 
   }

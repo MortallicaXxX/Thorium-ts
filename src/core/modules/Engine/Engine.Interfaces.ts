@@ -20,6 +20,6 @@ export interface EngineInterface {
   Var(value:any,options?:any):Prototype.Variable<any>;
   View(view:any):EngineInterface;
   Show():void;
-  setGeneralUserInterface(template:UI.TemplateInterface):void;
+  setGeneralUserInterface(template:UI.TemplateInterface<any>):void;
 
 }

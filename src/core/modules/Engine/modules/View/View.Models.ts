@@ -7,13 +7,13 @@ export {
 
 export class View implements ViewInterface{
 
-  #Template:UI.TemplateInterface;
+  #Template:UI.TemplateInterface<any>;
 
-  constructor(template:UI.TemplateInterface){
+  constructor(template:UI.TemplateInterface<any>){
     this.#Template = template;
   }
 
-  Main():UI.TemplateInterface{
+  Main():UI.TemplateInterface<any>{
     return this.#Template;
   }
 

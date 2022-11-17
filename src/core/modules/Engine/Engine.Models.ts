@@ -42,12 +42,12 @@ export const Engine = new class Engine implements EngineInterface{
     console.log(thorium.Engine.Vue.ui);
     thorium.Engine.Vue.ui.BuildIn(document.body)
     .then(function(result:any){
-      thorium.Engine.app = result;
+      thorium.Engine.app = result.elements[0];
       thorium.Engine.app.Initialise();
     })
   }
 
-  setGeneralUserInterface(template:UI.TemplateInterface):void{
+  setGeneralUserInterface(template:UI.TemplateInterface<any>):void{
     console.log("setGeneralUserInterface",template);
     this.Vue = new UI.GUI(template);
   }

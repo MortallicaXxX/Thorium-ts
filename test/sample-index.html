@@ -8,214 +8,217 @@
   <body>
 
   </body>
-  <script type="text/javascript" src="../dist/index.js"></script>
+  <script type="text/javascript" src="https://thoriumcdn.herokuapp.com/cdn/Thorium.js"></script>
+  <!-- <script type="text/javascript" src="../dist/browser/Thorium.js"></script> -->
   <script type="text/javascript">
 
-    class View1 extends View{
+    console.log(thorium);
 
-      static Buttons = class extends thorium.Components.Div{
+    // class View1 extends View{
 
-        static Button = class extends thorium.Themes.Default.Button.Default {
-          constructor(text,background,color,size){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              prop : {
-                name : "Default"
-              }
-            })
-          }
-        }
+    //   static Buttons = class extends thorium.Components.Div{
 
-        static ButtonOutline = class extends thorium.Themes.Default.Button.DefaultOutline {
-          constructor(text,background,color,size){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              prop : {
-                name : "DefaultOutline"
-              },
-              proto : {
-                BeforeInitialise(){
-                  console.log("BeforeInitialise",this);
-                },
-                AfterInitialise(){
-                  console.log("AfterInitialise",this);
-                },
-                onMouseEnter : function(){
-                  console.log("pipi");
-                },
-                onMouseMove : function(){
-                  console.log({...thorium.Engine.Handlers.Mouse.Buttons});
-                }
-              }
-            })
-          }
-        }
+    //     static Button = class extends thorium.Themes.Default.Button.Default {
+    //       constructor(text,background,color,size){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           prop : {
+    //             name : "Default"
+    //           }
+    //         })
+    //       }
+    //     }
 
-        static ButtonRound = class extends thorium.Themes.Default.Button.DefaultRound {
-          constructor(text,background,color){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              prop : {
-                name : "DefaultRound"
-              }
-            })
-          }
-        }
+    //     static ButtonOutline = class extends thorium.Themes.Default.Button.DefaultOutline {
+    //       constructor(text,background,color,size){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           prop : {
+    //             name : "DefaultOutline"
+    //           },
+    //           proto : {
+    //             BeforeInitialise(){
+    //               console.log("BeforeInitialise",this);
+    //             },
+    //             AfterInitialise(){
+    //               console.log("AfterInitialise",this);
+    //             },
+    //             onMouseEnter : function(){
+    //               console.log("pipi");
+    //             },
+    //             onMouseMove : function(){
+    //               console.log({...thorium.Engine.Handlers.Mouse.Buttons});
+    //             }
+    //           }
+    //         })
+    //       }
+    //     }
 
-        static ButtonRoundOutline = class extends thorium.Themes.Default.Button.DefaultOutlineRound {
-          constructor(text,background,color,size){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size
-            })
-          }
-        }
+    //     static ButtonRound = class extends thorium.Themes.Default.Button.DefaultRound {
+    //       constructor(text,background,color){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           prop : {
+    //             name : "DefaultRound"
+    //           }
+    //         })
+    //       }
+    //     }
 
-        constructor(){
-          super({
-            prop : {
-              text : "Buttons",
-              name : "Buttons"
-            },
-            childrens : [
-              new View1.Buttons.Button("Default","blue","white"),
-              new View1.Buttons.ButtonOutline("DefaultOutline","dark","white"),
-              new View1.Buttons.ButtonRound("DefaultRound","red","white"),
-              new View1.Buttons.ButtonRoundOutline("DefaultOutlineRound","warning","white"),
-            ]
-          })
-        }
+    //     static ButtonRoundOutline = class extends thorium.Themes.Default.Button.DefaultOutlineRound {
+    //       constructor(text,background,color,size){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size
+    //         })
+    //       }
+    //     }
 
-      }
+    //     constructor(){
+    //       super({
+    //         prop : {
+    //           text : "Buttons",
+    //           name : "Buttons"
+    //         },
+    //         childrens : [
+    //           new View1.Buttons.Button("Default","blue","white"),
+    //           new View1.Buttons.ButtonOutline("DefaultOutline","dark","white"),
+    //           new View1.Buttons.ButtonRound("DefaultRound","red","white"),
+    //           new View1.Buttons.ButtonRoundOutline("DefaultOutlineRound","warning","white"),
+    //         ]
+    //       })
+    //     }
 
-      static Icons = class extends thorium.Components.Div{
+    //   }
 
-        static Icon = class extends thorium.Themes.Default.Button.Icon{
-          constructor(text,background,color,size,url,iconSide){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              iconURL : url,
-              iconSide: iconSide
-            })
-          }
-        }
+    //   static Icons = class extends thorium.Components.Div{
 
-        static IconOutline = class extends thorium.Themes.Default.Button.IconOutline{
-          constructor(text,background,color,size,url,iconSide){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              iconURL : url,
-              iconSide :iconSide
-            });
-          }
-        }
+    //     static Icon = class extends thorium.Themes.Default.Button.Icon{
+    //       constructor(text,background,color,size,url,iconSide){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           iconURL : url,
+    //           iconSide: iconSide
+    //         })
+    //       }
+    //     }
 
-        static IconRound = class extends thorium.Themes.Default.Button.IconRound{
-          constructor(text,background,color,size,url,iconSide){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              iconURL : url,
-              iconSide :iconSide
-            });
-          }
-        }
+    //     static IconOutline = class extends thorium.Themes.Default.Button.IconOutline{
+    //       constructor(text,background,color,size,url,iconSide){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           iconURL : url,
+    //           iconSide :iconSide
+    //         });
+    //       }
+    //     }
 
-        static IconOutlineRound = class extends thorium.Themes.Default.Button.IconOutlineRound{
-          constructor(text,background,color,size,url,iconSide){
-            super({
-              text : text,
-              background : background,
-              color : color,
-              size : size,
-              iconURL : url,
-              iconSide :iconSide
-            });
-          }
-        }
+    //     static IconRound = class extends thorium.Themes.Default.Button.IconRound{
+    //       constructor(text,background,color,size,url,iconSide){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           iconURL : url,
+    //           iconSide :iconSide
+    //         });
+    //       }
+    //     }
 
-        constructor(){
-          super({
-            prop : {
-              text : "Icones",
-              name : "Icones"
-            },
-            childrens : [
-              new View1.Icons.Icon("Icon","white","gray","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","right"),
-              new View1.Icons.IconOutline("IconOutline","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-              new View1.Icons.IconRound("IconRound","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-              new View1.Icons.IconOutlineRound("IconOutlineRound","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","right"),
+    //     static IconOutlineRound = class extends thorium.Themes.Default.Button.IconOutlineRound{
+    //       constructor(text,background,color,size,url,iconSide){
+    //         super({
+    //           text : text,
+    //           background : background,
+    //           color : color,
+    //           size : size,
+    //           iconURL : url,
+    //           iconSide :iconSide
+    //         });
+    //       }
+    //     }
 
-              new View1.Icons.Icon("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-              new View1.Icons.IconOutline("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-              new View1.Icons.IconRound("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-              new View1.Icons.IconOutlineRound("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
-            ]
-          })
-        }
+    //     constructor(){
+    //       super({
+    //         prop : {
+    //           text : "Icones",
+    //           name : "Icones"
+    //         },
+    //         childrens : [
+    //           new View1.Icons.Icon("Icon","white","gray","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","right"),
+    //           new View1.Icons.IconOutline("IconOutline","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //           new View1.Icons.IconRound("IconRound","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //           new View1.Icons.IconOutlineRound("IconOutlineRound","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","right"),
 
-      }
+    //           new View1.Icons.Icon("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //           new View1.Icons.IconOutline("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //           new View1.Icons.IconRound("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //           new View1.Icons.IconOutlineRound("","red","white","regular","https://cdn-icons-png.flaticon.com/512/124/124010.png","left"),
+    //         ]
+    //       })
+    //     }
 
-      constructor(){
-        super(new thorium.Components.App({
-          prop : {
-            name : "app",
-            style : Style.Css({
-              height : "100%",
-              width : '100%',
-              position : "absolute",
-              top : 0,
-              left: 0
-            })
-          },
-          childrens : [
-            new View1.Buttons(),
-            new View1.Icons()
-          ],
-          proto : {
-            onInitialise : function(){
-              console.log("init")
-            },
-            onFrameUpdate : function(cpuStats){
-              // console.log(cpuStats);
-            },
-            // onMouseDown : function(){
-            //   new thorium.UI.NodeUI([
-            //     new thorium.Components.Dialog({
-            //       childrens : [
-            //         new thorium.Components.Textarea({
-            //
-            //         })
-            //       ]
-            //     })
-            //   ])
-            //   .BuildIn(document.body)
-            // }
-          }
-        }))
-      }
+    //   }
 
-    }
+    //   constructor(){
+    //     super(new thorium.Components.App({
+    //       prop : {
+    //         name : "app",
+    //         style : Style.Css({
+    //           height : "100%",
+    //           width : '100%',
+    //           position : "absolute",
+    //           top : 0,
+    //           left: 0
+    //         })
+    //       },
+    //       childrens : [
+    //         new View1.Buttons(),
+    //         new View1.Icons()
+    //       ],
+    //       proto : {
+    //         onInitialise : function(){
+    //           console.log("init")
+    //         },
+    //         onFrameUpdate : function(cpuStats){
+    //           // console.log(cpuStats);
+    //         },
+    //         // onMouseDown : function(){
+    //         //   new thorium.UI.NodeUI([
+    //         //     new thorium.Components.Dialog({
+    //         //       childrens : [
+    //         //         new thorium.Components.Textarea({
+    //         //
+    //         //         })
+    //         //       ]
+    //         //     })
+    //         //   ])
+    //         //   .BuildIn(document.body)
+    //         // }
+    //       }
+    //     }))
+    //   }
 
-    thorium.Vue(View1).Show();
+    // }
+
+    // thorium.Vue(View1).Show();
 
   </script>
 </html>

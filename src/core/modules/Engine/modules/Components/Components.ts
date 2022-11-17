@@ -3,75 +3,75 @@ import { Style } from "../Style/Style";
 
 export namespace Components{
 
-  export class App extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
-      super(new UI.Template({
+  export class App<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template<T>({
         type:'app',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Main extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Main<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'main',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
   // BASE HTML
 
-  export class Nav extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Nav<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'nav',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
-  export class Article extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Article<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'article',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Section extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Section<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'section',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
-  export class Aside extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Aside<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'aside',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
-  export class Text extends UI.ElementUI{
+  export class Text<T> extends UI.ElementUI<T>{
     constructor(arg:any,position:string = "left"){
 
       if(typeof arg == 'object' && 'position' in arg)(function(){
@@ -166,69 +166,92 @@ export namespace Components{
     }
   }
 
-  export class H1 extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class H1<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'h1',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Dialog extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Dialog<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'dialog',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Div extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Div<T> extends UI.ElementUI<T>{
+
+    constructor(arg:UI.TemplateInterface<T>){
+
       super(new UI.Template({
         type:'div',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Container extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Span<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type: 'span',
+        prop : (arg.prop? arg.prop : {}),
+        proto : (arg.proto? arg.proto : null)
+      }));
+    }
+  }
+
+  export class Container<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'container',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Form extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Form<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'form',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Button extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Fieldset<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type:'fieldset',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }));
+    }
+  }
+
+  export class Button<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       const template:any = arg;
-      if('prop' in arg && 'text' in arg.prop){
-        template.text = template.prop.text;
-        delete template.prop.text;
-      }
-      template.childrens = ('text' in arg ? [new Text(template.text,'center')] : arg.childrens)
+      // if('prop' in arg && 'text' in arg.prop){
+      //   template.text = template.prop.text;
+      //   delete template.prop.text;
+      // }
+      // template.childrens = ('text' in arg ? [new Text(template.text,'center')] : arg.childrens)
       super(new UI.Template({
         type:'button',
         prop : arg.prop,
@@ -238,69 +261,190 @@ export namespace Components{
     }
   }
 
-  export class Input extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Input<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'input',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
-  export class Textarea extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class DataList<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type:'DATALIST',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }))
+    }
+  }
+
+  export class Output<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type:'output',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }))
+    }
+  }
+
+  export class Label<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type:'label',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }))
+    }
+  }
+
+  export class Textarea<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type:'textarea',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
     }
   }
 
-  export class Select extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Select<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type : 'select',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Option extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class Option<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type : 'option',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class OptionGroup extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class OptionGroup<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type : 'optgroup',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }));
     }
   }
 
-  export class Canvas extends UI.ElementUI{
-    constructor(arg:UI.TemplateInterface){
+  export class HTMLObject<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'object',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }))
+    }
+  }
+
+  export class Iframe<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'iframe',
+        prop : (arg.prop ? arg.prop : {}),
+        childrens : (arg.childrens ? arg.childrens : []),
+        proto : (arg.proto ? arg.proto : null)
+      }))
+    }
+  }
+
+  export class Canvas<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
       super(new UI.Template({
         type : 'canvas',
         prop : (arg.prop ? arg.prop : {}),
         childrens : (arg.childrens ? arg.childrens : []),
-        proto : (arg.proto ? arg.proto : {})
+        proto : (arg.proto ? arg.proto : null)
       }))
+    }
+  }
+
+  export class Svg<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'svg',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class Path<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'path',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class Link<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'a',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }))
+    }
+  }
+
+  export class Ul<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'ul',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }))
+    }
+  }
+
+  export class Li<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'li',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }))
+    }
+  }
+
+  export class Image<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'img',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
     }
   }
 

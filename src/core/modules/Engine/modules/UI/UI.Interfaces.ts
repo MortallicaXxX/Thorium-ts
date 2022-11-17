@@ -1,31 +1,34 @@
-export interface Template{
+import { GhostController } from "../../../../Core";
+
+export interface Template<T>{
   type?:string;
-  prop?:object;
+  prop?:Record<string,string|boolean|number>;
   childrens?:NodeUI|object[];
-  proto?:object;
-  Main?(template:{type:string,prop?:object|null,childrens?:NodeUI|object[],proto?:object|null}):void;
+  proto?:T;
+  Main?(template:{type:string,prop?:Record<string,string|boolean|number>|null,childrens?:NodeUI|object[],proto?:T}):void;
 }
 
-export interface ElementUI{
-  template:Template;
+export interface ElementUI<T>{
+  template:Template<T>;
   type:string;
-  prop:object;
+  prop:Record<string,string|boolean|number>;
   childrens:any;
-  proto:object;
-  Main(template:Template):void;
+  proto:T;
+  Main(template:Template<T>):void;
   CreateElement(parent?:any):HTMLElement|any;
 }
 
 export interface NodeUI{
-  Node:ElementUI[];
+  Node:ElementUI<any>[];
   Parent:HTMLElement|null;
   Root:any|null;
-  Main(template:Template|object[] , root?:any , parent?:HTMLElement):void;
-  BuildIn(parent:any):Promise<void>;
-  normalize(template:Template|object[]):Array<ElementUI>|[];
+  Main(template:Template<any>|object[] , root?:any , parent?:HTMLElement):void;
+  BuildIn(parent:any):Promise<NodeUI>;
+  Initialise:()=>void;
+  normalize(template:Template<any>|object[]):Array<ElementUI<any>>|[];
 }
 
 export interface GUI{
   ui:NodeUI;
-  Main(template:Template):void;
+  Main(template:Template<any>):void;
 }
