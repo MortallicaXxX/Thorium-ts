@@ -32,7 +32,7 @@ export const Engine = new class Engine implements EngineInterface{
   }
 
   View(view:any):Engine{
-    this.setGeneralUserInterface((new view).Main());
+    this.setGeneralUserInterface((new view()).Main());
     return this;
   }
 
@@ -41,9 +41,12 @@ export const Engine = new class Engine implements EngineInterface{
     console.log("Show");
     console.log(thorium.Engine.Vue.ui);
     thorium.Engine.Vue.ui.BuildIn(document.body)
-    .then(function(result:any){
-      thorium.Engine.app = result.elements[0];
-      thorium.Engine.app.Initialise();
+    .then(function(node){
+      console.log(node);
+      // thorium.Engine.app = node.elements[0];
+      thorium.Engine.app = node.elements[0];
+      console.log(thorium.Engine.app);
+      node.Initialise();
     })
   }
 

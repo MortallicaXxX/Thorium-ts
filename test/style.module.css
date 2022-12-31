@@ -1,0 +1,149 @@
+.Notifications{
+    display: grid;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.Notifications > [name=content]{
+    display: grid;
+    width: 300px;
+    margin-left: auto;
+    grid-auto-rows: min-content;
+}
+
+@media (orientation : portrait){
+    .Notifications > [name=content]{
+        display: grid;
+        width: 300px;
+        margin-left: auto;
+        margin-right:auto;
+        grid-auto-rows: min-content;
+    }
+}
+
+.Notifications > [name=content]{
+    display: grid;
+    width: 300px;
+    margin-left: auto;
+    grid-auto-rows: min-content;
+}
+
+.Notifications [name=notification]{
+    animation: pop 1s 1;
+    transition: 0.7s;
+}
+
+.Notifications [name=notification][type=simple]{
+    width: -webkit-fill-available;
+    height: fit-content;
+    border: 1px solid rgba(105, 105, 105 , 0.2);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #e0e0e0;
+    box-shadow:  2px 2px 10px rgb(0 0 0 / 25%);
+    background: #fEfEfEfE;
+    color: dimgray;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 0px 10px 0 rgba( 31, 38, 135, 0.20 );
+    backdrop-filter: blur( 4px );
+    border-radius: 5px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.Notifications [name=notification][type=simple] > [name=content]{
+    
+}
+
+.Notifications [name=notification][type=simple] > [name=content] > [name=line]{
+    font-weight: bold;
+    color: black;
+    width: -webkit-fill-available;
+    gap: 10px;
+    user-select: none;
+}
+
+.Notifications [name=notification][type=simple] > [name=content] > [name=line] > [name=text]{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Notifications [name=notification][type=simple] > [name=content] > [name=line] > [name=icon][icon-mask=mask]{
+    display: grid;
+    mask: none;
+}
+
+.Notifications [name=notification][type=simple] > [name=content] > [name=line] > [name=icon][icon-mask=mask]::before{
+    content : ' ';
+    aspect-ratio: 1/1;
+    mask-image: url(./notification.svg);
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: lightseagreen;
+}
+
+.Notifications [name=notification][deletion=true]{
+    animation: deletion 0.5s 1;
+    height: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.Notifications [name=notification][deletion=true] > *{
+    display: none;
+    height: 0;
+}
+
+.NotificationClose{
+    display: grid;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.NotificationClose:hover,
+.NotificationClose:active
+{
+    background-color: royalblue;
+}
+
+.NotificationClose::before{
+    content : " ";
+    mask-image: url(./plus.svg);
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    transform: rotateZ(45deg);
+    background-color: dimgray;
+    aspect-ratio: 1/1;
+    height: 20px;
+}
+
+.NotificationClose:hover::before,
+.NotificationClose:active::before{
+    background-color: white;
+}
+
+@keyframes pop {
+    0% {
+        transform: translateY(-200%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes deletion {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}

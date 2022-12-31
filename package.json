@@ -1,8 +1,8 @@
 {
   "name": "thoriumjs",
-  "version": "2.1.26",
-  "description": "Framework client-side javascrit",
-  "main": "dist/index.js",
+  "version": "2.1.32",
+  "description": "Framework client-side javascript",
+  "main": "./dist/lib/index.js",
   "watch": {
     "compile": {},
     "build:WebPack": {
@@ -19,13 +19,14 @@
   "scripts": {
     "build:WebPack": "webpack",
     "build:TestPack": "webpack --config testPack.config.js",
+    "build:TestPack:watch": "webpack --config testPack.config.js --watch",
     "compile": "npx tsc",
     "doc": "npx typedoc src/index.ts",
     "watch": "npm-watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MortallicaXxX/ThoriumJS.git"
+    "url": "git+https://github.com/MortallicaXxX/Thorium-ts"
   },
   "author": "",
   "license": "ISC",
@@ -34,15 +35,24 @@
   },
   "homepage": "https://github.com/MortallicaXxX/ThoriumJS#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.13",
     "axios": "^0.21.4",
+    "css-loader": "^6.7.2",
     "dotenv": "^10.0.0",
+    "file-loader": "^6.2.0",
     "form-data": "^4.0.0",
     "hash.js": "^1.1.7",
     "json-stringify": "^1.0.0",
     "node-fetch": "^3.0.0",
     "npm-watch": "^0.11.0",
     "osm": "^1.0.0",
-    "package": "^1.0.1"
+    "package": "^1.0.1",
+    "postcss": "^8.4.19",
+    "postcss-cli": "^10.0.0",
+    "postcss-loader": "^7.0.1",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack-closure-compiler": "^2.1.6"
   },
   "devDependencies": {
     "@types/node": "^16.4.13",

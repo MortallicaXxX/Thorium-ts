@@ -5,73 +5,7 @@
     <meta charset="utf-8">
     <title>Thorium with Mutations</title>
   </head>
-  <style>
-
-    p{
-      padding: 0;
-      margin: 0;
-    }
-
-    app{
-      font-size: 50px;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sampleContainer{
-      width : min-content;
-      height: min-content;
-      display: grid;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 20px;
-    }
-
-    .sampleContainer > .clock[loaded=false]::before{
-      content : 'loading';
-      animation-name: loading;
-      animation-duration: 0.3s;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes loading {
-       0% {
-        content:'.loading.';
-       }
-       33% {
-        content:'..loading..';
-       }
-       66% {
-        content:'...loading...';
-       }
-    }
-
-    .sampleContainer > .clickMe{
-      width: 200px;
-      height: 50px;
-      margin: auto;
-      background-color: royalblue;
-      border: none;
-      outline: none;
-      color: white;
-      font-size: 20px;
-      border-radius: 20px;
-      box-shadow:  1px 1px 1px #3759bf, -1px -1px 1px #4b79ff;
-    }
-
-    .sampleContainer > .clickMe:active{
-      background: linear-gradient(145deg, #3b5fcb, #4670f1);
-      box-shadow: inset 1px 1px 1px #3759bf,
-                  inset -1px -1px 1px #4b79ff;
-    }
-  </style>
+  
   <body>
   </body>
   <script src="./javascript/main.js"></script>

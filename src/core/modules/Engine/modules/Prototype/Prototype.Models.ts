@@ -151,13 +151,13 @@ export const __th__Listeners = new class __th__Listeners implements __th__Listen
     if(t.getAttribute('name'))delete t.parentNode[t.getAttribute('name')];
     t.outerHTML = "";
   };
-  Update(){
+  Update(message:any){
     const _this:any = this;
     const t:HTMLthoriumElement = _this;
-    if("onUpdate" in t)t.onUpdate();
+    if("onUpdate" in t)t.onUpdate(message);
     for(const element of t.children){
       const e = (element as HTMLthoriumElement);
-      if('Update' in e)e.Update();
+      if('update' in e)(e as any).update(message);
     }
   };
   Resize(){
@@ -237,10 +237,14 @@ export class __th__ implements ThInterface{
   //   else if(((this.element.parentNode as any).tagName == 'BODY'))return this.element;
   //   else return (this.element.parentNode as any).th.context;
   // }
-  context:()=>HTMLthoriumElement = function(){
+  context:(contextName?:string)=>HTMLthoriumElement = function(contextName?:string){
 
     const findContext = (element:HTMLElement|ParentNode) => {
-      if((element.parentNode as Element).classList.contains('context'))return element.parentNode;
+      if((element.parentNode as Element).classList.contains('context')){
+        if(contextName && (element.parentNode as Element).getAttribute('name') == contextName)return element.parentNode;
+        if(contextName && (element.parentNode as Element).getAttribute('name') != contextName)return findContext(element.parentNode);
+        else return element.parentNode;
+      }
       else if(((element.parentNode as Element).tagName == 'APP'))return element;
       else return findContext(element.parentNode);
     }

@@ -106,7 +106,9 @@ export namespace Thorium{
   export const Engine:engine.EngineInterface = engine.Engine;
   export const Components:typeof components = components;
 
-  export const Vue = function(view:any){return Thorium.Engine.View(view)};
+  export const Vue = function(view:any){
+    return Thorium.Engine.View(view)
+  };
   export const View = view;
   export const Show = function(){return Thorium.Engine.Show};
   export const component:typeof userinterface.ElementUI = Thorium.Engine.component;

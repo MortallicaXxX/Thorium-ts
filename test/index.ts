@@ -1,91 +1,189 @@
-import Thorium , { View , Style , Prototype , UserInterface , Controller , Components , useState} from '../src/index';
+import Thorium , { View , Style , Prototype , UserInterface , Controller , Components , useState} from '../';
 
-console.warn(document.readyState);
+// import NotificationsHanlder , { Notifications , simpleNotification } from '../../Thorium-Toolkit-ui/std-components/Notification/src/Notifications';
 
-const clock = new class Clock extends Components.Div<Controller>{
-  constructor(){
+const {
+  Template,
+  ElementUI
+} = UserInterface;
 
-    /// Définission des différents variables qui vont être utiliser dans cette exemple
-      /// loaded représente l'état de chargement du component, définis à false au début
-    const [loaded,setloaded] = useState<boolean>(false);
-      /// timer est la valeur du temps actuel dans ce format hh:mm:ss
-    const [timer,setTimer] = useState<string>('');
+import Icon from '../../Thorium-Toolkit-ui/std-components/Icon/src/Icon';
 
-    super({
-      prop : {
-        name : 'clock',
-        class : 'clock',
-        /// définission d'attributs mutants, càd qu'il serront observée
-        ':loaded' : loaded.value,
-        ':timer' : timer.value,
-      },
-      proto : {
-        /// callback de la détection de mutations
-        onMutation : function(mutation){
+// const notificationContainerId = crypto.randomUUID();
 
-          const {
-            attributeName:name
-          } = mutation;
+// const NotificationsHanlder = new class {
 
-          /// Si le chargement est finis et que le nom de la mutation est 'timer',
-          /// on affiche la valeur de timer dans la clock
-          if(loaded.value && name == 'timer')this.innerHTML = `<p>${timer.value}</p>`;
+//   #_notifications:Map<string,Controller> = new Map();
+//   get notificationZone(){return document.querySelectorAll(`[id='${notificationContainerId}'][name=notifications]`)[0]}
+//   get notificationContainer(){return this.notificationZone.querySelectorAll('[name=content]')[0]}
+//   get notifications(){return this.#_notifications};
 
-        },
-        AfterInitialise(){
+//   add(notificationTemplate):Promise<string>{
+//     return new Promise((next) => {
+//       const notificationId = crypto.randomUUID();
+//       // const notification = (new notificationTemplate()).CreateElement(this.notificationContainer);
+//       // this.notificationContainer.insertBefore(notification , this.notificationContainer.children[0]);
+//       // notification.Initialise();
+//       // this.#_notifications.set(notificationId , notification);
+//       // next(notificationId);
+//       new UserInterface.NodeUI([new notificationTemplate(notificationId)])
+//       .BuildIn(this.notificationContainer)
+//       .then((node) => {
+//         node.Initialise();
+//         this.notificationContainer.insertBefore((node.elements[0] as Element) , this.notificationContainer.children[0]);
+//         this.#_notifications.set(notificationId , node.elements[0]);
+//         next(notificationId);
+//       })
+//     })
+//   }
+//   delete(notificationId:string){
+//     if(this.#_notifications.has(notificationId)){
+//       (this.#_notifications.get(notificationId) as Element).setAttribute('deletion','true');
+//     }
+//   }
 
-          /// Pour simuler un chargement, un delais de 1s exécute
-          /// le passage de l'attribut loaded à true.
-          setTimeout(() => {
-            this.setAttribute('loaded' , setloaded(true));
-          } , 1000)
+// }();
 
-          /// Pour simuler une update toute les 1s de la clock,
-          /// un interval va exécuter le changement de temps
-          setInterval(() => {
-            const date = new Date();
-            this.setAttribute('timer' , setTimer(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`));
-          } , 1000);
+// interface NotificationsController extends Controller{
+//   add:()=>void;
+//   remove:()=>void;
+// }
 
-        }
-      }
-    })
-  }
-}()
+// type NotificationType = "simple" | "actions";
 
-const clickMe = new class extends Components.Button<Controller>{
-  constructor(){
+// interface NotificationOptionsInit{
+//   id:string;
+//   type : NotificationType;
+//   line : any;
+//   description?:any;
+//   buttons?:any[];
+// }
 
-    /// count 
-    const [count,addCount] = useState<number>(0);
+// const Notification = class extends Components.Div<Controller>{
+//   constructor(options:NotificationOptionsInit){
+//     super({
+//       prop : {
+//         id:options.id,
+//         class : `context`,
+//         name : 'notification',
+//         type : options.type,
+//         ':deletion':false
+//       },
+//       childrens : [
+//         new Components.Div<Controller>({
+//           prop : {
+//             name : 'content'
+//           },
+//           childrens : (() => {
+//             return [
+//               new options.line(),
+//               ...(options.description ? [new options.description()] : [])
+//             ]
+//           })(),
+//         })
+//       ],
+//       proto : {
+//         onMutation(mutation){
+//           const value = this.getAttribute(mutation.attributeName);
 
-    super({
-      prop : {
-        name : 'clickMe',
-        class : 'clickMe',
-        ':count' : count.value,
-        text : 'click'
-      },
-      proto : {
-        onMutation(mutation){
-          if(mutation.attributeName == 'count')this.innerText = count.value;
-        },
-        onMouseDown(){
-          this.setAttribute('count' , addCount(count.value + 1));
-        }
-      }
-    })
-  }
-}
+//           if(mutation.attributeName == 'deletion'){
+//               setTimeout(() => {
+//                 this.remove();
+//               } , 500)
+//           }
 
-const sampleContainer = new class extends Components.Container<Controller>{
-  constructor(){
-    super({
-      prop : {class : 'sampleContainer'},
-      childrens : [clock,clickMe]
-    })
-  }
-}
+//         }
+//       }
+//     })
+//   }
+// }
+
+// class Notifications extends Components.Div<Controller>{
+//   constructor(){
+//     super({
+//       prop : {
+//         id : notificationContainerId,
+//         name : 'notifications',
+//         class : `${style.Notifications}`
+//       },
+//       childrens : [
+//         new Components.Div<Controller>({
+//           prop : {
+//             name : 'content'
+//           }
+//         })
+//       ]
+//     })
+//   }
+// }
+
+// interface simpleNotificationOptionsInit extends LineControlInitOptions{
+//   description?:string;
+// }
+
+// export async function simpleNotification(options?:simpleNotificationOptionsInit){
+
+//   const notificationId:string = await NotificationsHanlder.add(class extends Notification{
+//     constructor(notifId:string){
+
+//       // setTimeout(() => {
+//       //   NotificationsHanlder.delete(notificationId);
+//       // } , 6000)
+
+//       super({
+//         id : notifId,
+//         type : 'simple',
+//         line : class extends LineControls{
+//           constructor(){
+//             super({
+//               text : 'notification',
+//               icon : { type : 'mask' },
+//               controls : [{
+//                 class : `${style.NotificationClose}`,
+//                 action : () => {
+                  
+//                 }
+//               }],
+//               ...(options ? options : {})
+//             })
+//           }
+//         },
+//         ...(options && options.description ? {description : class extends Components.Label<Controller>{
+//           constructor(){
+//             super({
+//               prop : { name : 'description' , text : (options as simpleNotificationOptionsInit).description as string}
+//             })
+//           }
+//         }} : {})
+//       })
+//     }
+//   })
+
+// }
+
+// export function actionNotification(){
+
+//   // new Notification({
+//   //   type : 'simple',
+//   //   line : class extends LineControls{
+//   //     constructor(){
+//   //       super({
+//   //         text : 'Hello World',
+//   //         icon : { type : 'mask' , path : 'hello' },
+//   //         controls : []
+//   //       })
+//   //     }
+//   //   },
+//   //   description : class extends Components.Text<Controller>{
+//   //     constructor(){
+//   //       super({
+//   //         text : 'Hello'
+//   //       })
+//   //     }
+//   //   }
+//   // });
+
+// }
 
 const App = new class App extends Components.App<Controller>{
 
@@ -94,16 +192,34 @@ const App = new class App extends Components.App<Controller>{
       prop : {
         id : 'app'
       },
-      childrens : [sampleContainer],
+      childrens : [
+        // new Notifications()
+        // new Icon({ type : 'mask' })
+      ],
       proto : {
-        BeforeInitialise(){
-          console.timeLog('appInit');
-          console.warn('BeforeInitialise',document.readyState);
-        },
-        AfterInitialise(){
-          console.timeEnd('appInit');
-          console.warn('BeforeInitialise',document.readyState);
-        }
+        // AfterInitialise(){
+
+        //   setTimeout(() => {
+
+        //     simpleNotification({
+        //       text : 'hello',
+        //       // icon : { type : 'mask' , path : './notification.svg' },
+        //       description : crypto.randomUUID(),
+        //       controls : [
+        //         {
+        //           // class : `${style.NotificationClose}`,
+        //           class : `close`,
+        //           action : (e) => {
+        //             const notification = (e.target as any).context();
+        //             NotificationsHanlder.delete(notification.getAttribute('id'));
+        //           }
+        //         }
+        //       ]
+        //     });
+
+        //   } , 2000)
+
+        // }
       }
     })
   }
@@ -113,6 +229,7 @@ const App = new class App extends Components.App<Controller>{
 const AppView = class AppView extends View.View{
 
   constructor(){
+
     super(App as any);
   }
 

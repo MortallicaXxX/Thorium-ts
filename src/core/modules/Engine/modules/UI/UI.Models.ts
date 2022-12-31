@@ -37,7 +37,7 @@ export class Template<T> implements TemplateInterface<T>{
 
 export class ElementUI<T> implements ElementInterface<T>{
 
-  #template:TemplateInterface<T> = new Template;
+  #template?:TemplateInterface<T> = new Template;
   get template(){return this.#template}
   get type(){return this.#template.type;}
   get prop(){return this.#template.prop;}

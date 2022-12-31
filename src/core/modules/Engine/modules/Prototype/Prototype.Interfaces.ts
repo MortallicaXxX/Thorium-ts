@@ -12,7 +12,7 @@ export interface ComponentInterface{
 
 export interface __th__ListenersInterface{
   Initialise():void;
-  Update():void;
+  Update(message:any):void;
   Resize():void;
   Reset():void;
   FrameUpdate(cpuStats:Cpu.CpuInterface):void;
@@ -29,7 +29,7 @@ export interface __th__Ghost extends Ghost{
   isActive?:boolean;
   isFocus?:boolean;
   isMouseDown?:boolean;
-  context?:(x)=>HTMLthoriumElement;
+  context?:(contextName?:string)=>HTMLthoriumElement;
   onContextMenu?(e:any):void;
   BeforeInitialise?():void|Promise<void>;
   AfterInitialise?():void|Promise<void>;
@@ -48,7 +48,7 @@ export interface __th__Ghost extends Ghost{
   onChange?():void;
   onFocus?():void;
   onUnFocus?():void;
-  onUpdate?():void;
+  onUpdate?(message:any):void;
   onResize?():void;
   onReset?():void;
   onDragStart?(e):void;
@@ -75,7 +75,7 @@ export interface __th__{
   isFocus?:boolean;
   _clicked?:VariableInterface<boolean>;
   isMouseDown?:boolean;
-  context?:(x)=>HTMLthoriumElement;
+  context?:(contextName?:string)=>HTMLthoriumElement;
   onContextMenu?(e:any):void;
   BeforeInitialise?():void|Promise<void>;
   AfterInitialise?():void|Promise<void>;
@@ -92,7 +92,7 @@ export interface __th__{
   onChange?():void;
   onFocus?():void;
   onUnFocus?():void;
-  onUpdate?():void;
+  onUpdate?(message:any):void;
   onResize?():void;
   onReset?():void;
   onDragStart?(e):void;

@@ -6,7 +6,7 @@ module.exports = {
   entry: "./test",
   target: "node",
   output: {
-    path: path.resolve(__dirname, "test/javascript"),
+    path: "/Users/guillaume/Documents/github/test/public",
     filename: "main.js"
   },
   module: {
@@ -17,15 +17,6 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: { publicPath: "dist" }
-          }
-        ]
-      },
-      {
         test: /\.node$/,
         use: [
           {
@@ -33,11 +24,44 @@ module.exports = {
             options: { name: "[name]-[hash].[ext]" }
           }
         ]
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          { 
+            loader: "style-loader", 
+            options: { injectType: "styleTag" } 
+          } , {
+            loader : "css-loader" , 
+            options: {
+              url: true ,
+              esModule: false,
+              sourceMap: true,
+            }
+          },
+          "postcss-loader",
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: false,
+              esModule: false,
+              encoding: false,
+              mimetype: false,
+            },
+          },
+        ],
       }
     ]
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx"]
   },
-  plugins: [new CleanWebpackPlugin()]
+  plugins: [new CleanWebpackPlugin({
+    // dangerouslyAllowCleanPatternsOutsideProject: true
+  })]
 };
