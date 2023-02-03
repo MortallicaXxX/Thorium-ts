@@ -23,7 +23,7 @@ export const Engine = new class Engine implements EngineInterface{
   #Cpu:Cpu.CpuInterface = new Cpu.Cpu(this);
   CpuStats:Cpu.CpuInterface;
   Style:Style.StyleInterface = Style.Style;
-  app:any;
+  app:any = null;
 
   Var(value:any,options?:any):Prototype.Variable<any>{
     if(!options)options = {};
@@ -36,16 +36,16 @@ export const Engine = new class Engine implements EngineInterface{
     return this;
   }
 
-  Show():void{
-    const thorium:typeof Thorium = (window as Thorium.ThoriumWindow).thorium;
+  Show = ():void => {
+    // const thorium:typeof Thorium = (window as Thorium.ThoriumWindow).thorium;
     console.log("Show");
-    console.log(thorium.Engine.Vue.ui);
-    thorium.Engine.Vue.ui.BuildIn(document.body)
-    .then(function(node){
+    console.log(this.Vue.ui);
+    this.Vue.ui.BuildIn(document.body)
+    .then( (node) => {
       console.log(node);
       // thorium.Engine.app = node.elements[0];
-      thorium.Engine.app = node.elements[0];
-      console.log(thorium.Engine.app);
+      this.app = node.elements[0];
+      console.log(this.app);
       node.Initialise();
     })
   }

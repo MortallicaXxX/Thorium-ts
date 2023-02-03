@@ -448,6 +448,74 @@ export namespace Components{
     }
   }
 
+  export class Table<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'table',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class TableHead<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'thead',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class TableBody<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'tbody',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class TableRow<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'tr',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class TableH<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'th',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+  export class TableD<T> extends UI.ElementUI<T>{
+    constructor(arg:UI.TemplateInterface<T>){
+      super(new UI.Template({
+        type : 'td',
+        prop : (arg.prop? arg.prop : {}),
+        childrens : (arg.childrens?arg.childrens:[]),
+        proto:(arg.proto?arg.proto:null)
+      }));
+    }
+  }
+
+
+
   // TODO: Component H1
   // TODO: Component H2
   // TODO: Component H3

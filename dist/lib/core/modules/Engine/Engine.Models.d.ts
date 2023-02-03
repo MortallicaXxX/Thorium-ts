@@ -18,7 +18,7 @@ export declare const Engine: {
     app: any;
     Var(value: any, options?: any): Prototype.Variable<any>;
     View(view: any): any;
-    Show(): void;
+    Show: () => void;
     setGeneralUserInterface(template: UI.TemplateInterface<any>): void;
     readonly component: typeof UI.ElementUI;
 };

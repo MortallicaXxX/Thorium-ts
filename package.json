@@ -1,6 +1,6 @@
 {
   "name": "thoriumjs",
-  "version": "2.1.32",
+  "version": "2.1.33",
   "description": "Framework client-side javascript",
   "main": "./dist/lib/index.js",
   "watch": {

@@ -453,5 +453,71 @@ var Components;
         }
     }
     Components.Image = Image;
+    class Table extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'table',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.Table = Table;
+    class TableHead extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'thead',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.TableHead = TableHead;
+    class TableBody extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'tbody',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.TableBody = TableBody;
+    class TableRow extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'tr',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.TableRow = TableRow;
+    class TableH extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'th',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.TableH = TableH;
+    class TableD extends UI.ElementUI {
+        constructor(arg) {
+            super(new UI.Template({
+                type: 'td',
+                prop: (arg.prop ? arg.prop : {}),
+                childrens: (arg.childrens ? arg.childrens : []),
+                proto: (arg.proto ? arg.proto : null)
+            }));
+        }
+    }
+    Components.TableD = TableD;
 })(Components = exports.Components || (exports.Components = {}));
 //# sourceMappingURL=Components.js.map

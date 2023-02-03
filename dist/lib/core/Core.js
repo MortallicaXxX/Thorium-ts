@@ -51,7 +51,6 @@ var Thorium;
     Thorium.Engine = engine.Engine;
     Thorium.Components = Components_1.Components;
     Thorium.Vue = function (view) {
-        console.warn('Vue');
         return Thorium.Engine.View(view);
     };
     Thorium.View = view;

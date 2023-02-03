@@ -96,4 +96,22 @@ export declare namespace Components {
     class Image<T> extends UI.ElementUI<T> {
         constructor(arg: UI.TemplateInterface<T>);
     }
+    class Table<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
+    class TableHead<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
+    class TableBody<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
+    class TableRow<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
+    class TableH<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
+    class TableD<T> extends UI.ElementUI<T> {
+        constructor(arg: UI.TemplateInterface<T>);
+    }
 }

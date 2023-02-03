@@ -14,7 +14,7 @@ export declare class ElementUI<T> implements ElementInterface<T> {
     get template(): TemplateInterface<T>;
     get type(): string;
     get prop(): Record<string, string | number | boolean>;
-    get childrens(): object[] | NodeInterface;
+    get childrens(): NodeInterface | object[];
     get proto(): T;
     constructor(template?: TemplateInterface<T>);
     Main(template: TemplateInterface<T>): void;

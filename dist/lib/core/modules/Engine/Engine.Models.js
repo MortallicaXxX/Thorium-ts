@@ -17,6 +17,18 @@ exports.Engine = new (_a = class Engine {
             this.DataStorage = new DataStorage.DB(this);
             _Engine_Cpu.set(this, new Cpu.Cpu(this));
             this.Style = Style.Style;
+            this.app = null;
+            this.Show = () => {
+                console.log("Show");
+                console.log(this.Vue.ui);
+                this.Vue.ui.BuildIn(document.body)
+                    .then((node) => {
+                    console.log(node);
+                    this.app = node.elements[0];
+                    console.log(this.app);
+                    node.Initialise();
+                });
+            };
         }
         Var(value, options) {
             if (!options)
@@ -28,18 +40,6 @@ exports.Engine = new (_a = class Engine {
         View(view) {
             this.setGeneralUserInterface((new view()).Main());
             return this;
-        }
-        Show() {
-            const thorium = window.thorium;
-            console.log("Show");
-            console.log(thorium.Engine.Vue.ui);
-            thorium.Engine.Vue.ui.BuildIn(document.body)
-                .then(function (node) {
-                console.log(node);
-                thorium.Engine.app = node.elements[0];
-                console.log(thorium.Engine.app);
-                node.Initialise();
-            });
         }
         setGeneralUserInterface(template) {
             console.log("setGeneralUserInterface", template);
