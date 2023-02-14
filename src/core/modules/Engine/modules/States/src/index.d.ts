@@ -1,7 +1,7 @@
-export declare class State<T> {
+export declare class State {
     #private;
-    get value(): T;
+    get value(): any;
     constructor(value: any);
-    get mutator(): (this | ((value: any) => T))[];
+    get mutator(): (this | ((value: any) => any))[];
 }
-export default function useState<T>(arg: T): [State<T>, (value: T) => T];
+export default function useState<T>(arg: T): [State, (value: T) => T];

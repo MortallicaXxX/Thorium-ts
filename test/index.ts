@@ -7,7 +7,7 @@ const {
   ElementUI
 } = UserInterface;
 
-import Icon from '../../Thorium-Toolkit-ui/std-components/Icon/src/Icon';
+// import Icon from '../../Thorium-Toolkit-ui/std-components/Icon/src/Icon';
 
 // const notificationContainerId = crypto.randomUUID();
 
