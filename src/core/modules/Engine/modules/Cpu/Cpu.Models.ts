@@ -16,10 +16,9 @@ export class Cpu implements CpuInterface {
   constructor(engine:EngineInterface){
     const _this:Cpu = this;
     _this.engine = engine;
-    _this.cpuInterval = window.requestAnimationFrame(function(timestamp:number){
-      console.log("ici");
-      _this.callback(_this,timestamp);
-    })
+    // _this.cpuInterval = window.requestAnimationFrame(function(timestamp:number){
+    //   _this.callback(_this,timestamp);
+    // })
   }
 
   callback(cpu:Cpu,timestamp:number){
