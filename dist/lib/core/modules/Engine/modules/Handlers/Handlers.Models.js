@@ -12,7 +12,10 @@ class GlobalEvent {
         this.engine.app.Update();
     }
     Resize(event) {
-        this.engine.app.Resize(event);
+        try {
+            this.engine.app.Resize(event);
+        }
+        catch (_a) { }
     }
     FrameUpdate(cpuStats) {
         this.engine.CpuStats = cpuStats;

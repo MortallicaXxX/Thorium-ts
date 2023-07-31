@@ -10,10 +10,6 @@ class Cpu {
         this.fps = 0;
         const _this = this;
         _this.engine = engine;
-        _this.cpuInterval = window.requestAnimationFrame(function (timestamp) {
-            console.log("ici");
-            _this.callback(_this, timestamp);
-        });
     }
     callback(cpu, timestamp) {
         cpu.elapsedTime += Date.now() - cpu.lastTime;

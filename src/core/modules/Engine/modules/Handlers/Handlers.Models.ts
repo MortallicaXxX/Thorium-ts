@@ -37,7 +37,10 @@ export class GlobalEvent implements GlobalEventInterface{
     this.engine.app.Update();
   }
   Resize(event?:Event){
-    this.engine.app.Resize(event);
+    try{
+      this.engine.app.Resize(event);
+    }
+    catch{}
   }
   FrameUpdate(cpuStats:Cpu.CpuInterface){
     this.engine.CpuStats = cpuStats;
