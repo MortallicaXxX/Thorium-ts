@@ -519,5 +519,5 @@ var Components;
         }
     }
     Components.TableD = TableD;
-})(Components = exports.Components || (exports.Components = {}));
+})(Components || (exports.Components = Components = {}));
 //# sourceMappingURL=Components.js.map

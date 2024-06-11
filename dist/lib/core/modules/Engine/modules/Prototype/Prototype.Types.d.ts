@@ -1,2 +1,2 @@
 import { HTMLthoriumElement } from './Prototype.Interfaces';
-export declare type Ghost = Partial<HTMLthoriumElement>;
+export type Ghost = Partial<HTMLthoriumElement>;

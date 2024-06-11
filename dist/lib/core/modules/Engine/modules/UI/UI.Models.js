@@ -44,16 +44,16 @@ class Template {
 }
 exports.Template = Template;
 class ElementUI {
-    constructor(template) {
-        _ElementUI_template.set(this, new Template);
-        if (template)
-            this.Main(template);
-    }
     get template() { return __classPrivateFieldGet(this, _ElementUI_template, "f"); }
     get type() { return __classPrivateFieldGet(this, _ElementUI_template, "f").type; }
     get prop() { return __classPrivateFieldGet(this, _ElementUI_template, "f").prop; }
     get childrens() { return __classPrivateFieldGet(this, _ElementUI_template, "f").childrens; }
     get proto() { return __classPrivateFieldGet(this, _ElementUI_template, "f").proto; }
+    constructor(template) {
+        _ElementUI_template.set(this, new Template);
+        if (template)
+            this.Main(template);
+    }
     Main(template) {
         __classPrivateFieldSet(this, _ElementUI_template, new Template(template), "f");
     }
@@ -97,6 +97,11 @@ class ElementUI {
 exports.ElementUI = ElementUI;
 _ElementUI_template = new WeakMap();
 class NodeUI {
+    get elements() { return __classPrivateFieldGet(this, _NodeUI_Elements, "f"); }
+    ;
+    get Node() { return __classPrivateFieldGet(this, _NodeUI_node, "f"); }
+    get Parent() { return __classPrivateFieldGet(this, _NodeUI_parent, "f"); }
+    get Root() { return __classPrivateFieldGet(this, _NodeUI_root, "f"); }
     constructor(template, root, parent) {
         _NodeUI_node.set(this, []);
         _NodeUI_Elements.set(this, []);
@@ -118,11 +123,6 @@ class NodeUI {
         if (template)
             this.Main(template, root, parent);
     }
-    get elements() { return __classPrivateFieldGet(this, _NodeUI_Elements, "f"); }
-    ;
-    get Node() { return __classPrivateFieldGet(this, _NodeUI_node, "f"); }
-    get Parent() { return __classPrivateFieldGet(this, _NodeUI_parent, "f"); }
-    get Root() { return __classPrivateFieldGet(this, _NodeUI_root, "f"); }
     Main(template, root, parent) {
         if (root)
             __classPrivateFieldSet(this, _NodeUI_root, root, "f");
@@ -134,8 +134,8 @@ class NodeUI {
         const _this = this;
         function generate(i = 0) {
             return new Promise(function (next) {
-                var _a;
                 return __awaiter(this, void 0, void 0, function* () {
+                    var _a;
                     try {
                         if (_this.Node.length == 0)
                             throw { code: 1, message: "Pas d'enfants" };
@@ -189,12 +189,12 @@ class NodeUI {
 exports.NodeUI = NodeUI;
 _NodeUI_node = new WeakMap(), _NodeUI_Elements = new WeakMap(), _NodeUI_parent = new WeakMap(), _NodeUI_root = new WeakMap();
 class GUI {
+    get ui() { return __classPrivateFieldGet(this, _GUI_ui, "f"); }
     constructor(template) {
         _GUI_ui.set(this, new NodeUI());
         if (template)
             this.Main(template);
     }
-    get ui() { return __classPrivateFieldGet(this, _GUI_ui, "f"); }
     Main(template) {
         __classPrivateFieldSet(this, _GUI_ui, new NodeUI([template]), "f");
     }

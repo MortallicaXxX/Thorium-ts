@@ -13,7 +13,8 @@
     "preserveConstEnums" : true,
     "skipLibCheck": true,
     "moduleResolution":"node",
-    "outDir": "dist/lib"
+    "outDir": "dist/lib",
+    "lib": ["es2022"]
   },
   "include": ["./src/**/*"],
   "exclude": ["./src/modules"]

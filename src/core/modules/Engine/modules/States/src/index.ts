@@ -15,7 +15,7 @@ export class State<T>{
         return this.#_value;
     }
 
-    get mutator(){return [this,(value)=>{
+    get mutator():[State<T> , ((value: T) => T)]{return [this,(value)=>{
         this.#_mutationCallback(value);
         return this.#_update(value);
     }]}

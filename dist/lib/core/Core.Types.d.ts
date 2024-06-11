@@ -1,4 +1,4 @@
-export declare type ThoriumGlobal = Window & typeof globalThis & {
+export type ThoriumGlobal = Window & typeof globalThis & {
     NaN: never;
     Infinity: never;
 };

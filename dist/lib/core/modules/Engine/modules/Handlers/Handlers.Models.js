@@ -138,5 +138,5 @@ var Controls;
         }
     }
     Controls.Events = Events;
-})(Controls = exports.Controls || (exports.Controls = {}));
+})(Controls || (exports.Controls = Controls = {}));
 //# sourceMappingURL=Handlers.Models.js.map

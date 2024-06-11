@@ -223,6 +223,17 @@ exports.__th__Listeners = new class __th__Listeners {
     }
 };
 class __th__ {
+    get app() {
+        const x = window;
+        return x.thorium.app;
+    }
+    get element() { return this._e.Value; }
+    ;
+    get isInitialised() { return this._initilised.Value; }
+    ;
+    get isActive() { var _a; return (_a = this._active) === null || _a === void 0 ? void 0 : _a.Value; }
+    get isFocus() { var _a; return (_a = this._focus) === null || _a === void 0 ? void 0 : _a.Value; }
+    get isMouseDown() { var _a; return (_a = this._clicked) === null || _a === void 0 ? void 0 : _a.Value; }
     constructor(element, proto) {
         this.context = function (contextName) {
             const findContext = (element) => {
@@ -258,17 +269,6 @@ class __th__ {
             radioLike: exports.__th__Listeners.radioLike
         });
     }
-    get app() {
-        const x = window;
-        return x.thorium.app;
-    }
-    get element() { return this._e.Value; }
-    ;
-    get isInitialised() { return this._initilised.Value; }
-    ;
-    get isActive() { var _a; return (_a = this._active) === null || _a === void 0 ? void 0 : _a.Value; }
-    get isFocus() { var _a; return (_a = this._focus) === null || _a === void 0 ? void 0 : _a.Value; }
-    get isMouseDown() { var _a; return (_a = this._clicked) === null || _a === void 0 ? void 0 : _a.Value; }
 }
 exports.__th__ = __th__;
 class Component {

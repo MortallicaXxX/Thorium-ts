@@ -65,5 +65,5 @@ var Thorium;
         w.Style = style.Style;
         w.View = view.View;
     })(window);
-})(Thorium = exports.Thorium || (exports.Thorium = {}));
+})(Thorium || (exports.Thorium = Thorium = {}));
 //# sourceMappingURL=Core.js.map

@@ -2,7 +2,7 @@ export declare class State<T> {
     #private;
     get value(): T;
     constructor(value: any);
-    get mutator(): (this | ((value: any) => T))[];
+    get mutator(): [State<T>, ((value: T) => T)];
     addMutationListerner: (referenceElement: HTMLElement, callback: (value: T) => void) => string;
     removeMutationListener: (mutationListerId: string) => boolean;
 }
